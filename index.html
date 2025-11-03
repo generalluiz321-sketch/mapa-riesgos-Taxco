@@ -21,7 +21,42 @@
 
   <div id="map"></div>
 
+    <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.5.2/firebase-app.js";
+    import { getFirestore, collection, addDoc, getDocs } from "https://www.gstatic.com/firebasejs/10.5.2/firebase-firestore.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyBV-8tyGvx7z51EenCnd2QoT9dvuvmch4Q",
+      authDomain: "mapa-taxco.firebaseapp.com",
+      projectId: "mapa-taxco",
+      storageBucket: "mapa-taxco.firebasestorage.app",
+      messagingSenderId: "529569034869",
+      appId: "1:529569034869:web:d67fe8eac365778600fe3c"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const db = getFirestore(app);
+
+    // Ejemplo: guardar marcador
+    async function guardarMarcador(marcador) {
+      await addDoc(collection(db, "marcadores"), marcador);
+    }
+
+    // Ejemplo: leer marcadores
+    async function cargarMarcadores() {
+      const querySnapshot = await getDocs(collection(db, "marcadores"));
+      querySnapshot.forEach((doc) => {
+        const data = doc.data();
+        console.log(data); // Aquí puedes agregar el marcador al mapa
+      });
+    }
+
+    // Puedes llamar cargarMarcadores() aquí si quieres que se ejecute al cargar la página
+    cargarMarcadores();
+  </script>
+
   <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
   <script src="script.js"></script>
 </body>
 </html>
+
