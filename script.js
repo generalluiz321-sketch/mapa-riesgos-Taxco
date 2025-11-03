@@ -8,15 +8,11 @@ async function cargarMarcadoresDesdeFirebase() {
   const querySnapshot = await getDocs(collection(db, "marcadores"));
   querySnapshot.forEach((doc) => {
     const datos = doc.data();
-    crearMarcador({
-      lat: datos.lat,
-      lng: datos.lng,
-      nota: datos.nota,
-      color: datos.color,
-      enlace: datos.enlace || ""
-    });
+    datos.id = doc.id; // Guarda el ID para editar/borrar
+    crearMarcador(datos);
   });
 }
+
 
 
 let marcadores = []; // Lista de marcadores en el mapa
@@ -54,24 +50,26 @@ const iconos = {
     shadowSize: [41, 41]
   })
 
-
 };
-
 
 async function guardarMarcador(lat, lng, nota, color, enlace) {
   const nuevo = { lat, lng, nota, color, enlace };
-  await addDoc(collection(db, "marcadores"), nuevo);
+  const docRef = await addDoc(collection(db, "marcadores"), nuevo);
+  nuevo.id = docRef.id; // Guarda el ID para futuras ediciones
+  crearMarcador(nuevo);
 }
 
 
-function eliminarMarcador(marker, datos) {
-  map.removeLayer(marker); // Quita del mapa
+async function borrarMarcador(id, lat, lng, nota) {
+  await deleteDoc(doc(db, "marcadores", id));
 
-  // Quita de LocalStorage
-  let guardados = JSON.parse(localStorage.getItem("marcadores")) || [];
-  guardados = guardados.filter((m) => !(m.lat === datos.lat && m.lng === datos.lng && m.nota === datos.nota));
-  localStorage.setItem("marcadores", JSON.stringify(guardados));
+  const item = marcadores.find((m) => m.datos.id === id);
+  if (item) {
+    map.removeLayer(item.marker);
+    marcadores = marcadores.filter((m) => m.datos.id !== id);
+  }
 }
+
 
 function crearMarcador(datos) {
   const icono = iconos[datos.color] || iconos.rojo;
@@ -79,59 +77,79 @@ function crearMarcador(datos) {
   const marker = L.marker([datos.lat, datos.lng], { icon: icono }).addTo(map);
 
   let contenido = `<b>${datos.nota}</b><br>`;
+  contenido += `<div class="boton-grupo">`;
 
-contenido += `<div class="boton-grupo">`;
+  if (datos.enlace) {
+    contenido += `
+      <a href="${datos.enlace}" target="_blank">
+        <button class="btn-enlace"><i class="fas fa-link"></i> Enlace</button>
+      </a>
+    `;
+  }
 
-if (datos.enlace) {
   contenido += `
-    <a href="${datos.enlace}" target="_blank">
-      <button class="btn-enlace">
-        <i class="fas fa-link"></i> Enlace
-      </button>
-    </a>
-  `;
+    <button class="btn-editar" onclick="editarMarcador('${datos.id}', ${datos.lat}, ${datos.lng}, \`${datos.nota}\`, \`${datos.color}\`, \`${datos.enlace || ''}\`)">
+      <i class="fas fa-edit"></i> Editar
+    </button>
+    <button class="btn-borrar" onclick="borrarMarcador('${datos.id}', ${datos.lat}, ${datos.lng}, \`${datos.nota}\`)">
+      <i class="fas fa-trash"></i> Borrar
+    </button>
+  </div>`;
+
+  marker.bindPopup(contenido);
+  marcadores.push({ marker, datos });
 }
 
-contenido += `
-  <button class="btn-editar" onclick="editarMarcador(${datos.lat}, ${datos.lng}, \`${datos.nota}\`, \`${datos.color}\`, \`${datos.enlace || ''}\`)">
-    <i class="fas fa-edit"></i> Editar
-  </button>
-  <button class="btn-borrar" onclick="borrarMarcador(${datos.lat}, ${datos.lng}, \`${datos.nota}\`)">
-    <i class="fas fa-trash"></i> Borrar
-  </button>
-</div>
-`;
-
-
-  const popup = L.popup().setContent(contenido);
-  marker.bindPopup(popup);
-  marcadores.push(marker);
-}
 // edita marcadores
-window.editarMarcador = function(lat, lng, nota, color, enlace) {
+window.editarMarcador = async function(id, lat, lng, nota, color, enlace) {
   const nuevaNota = prompt("Nueva descripción:", nota);
   if (!nuevaNota) return;
 
   const nuevoColor = prompt("Nuevo color (rojo, azul, verde, amarillo):", color).toLowerCase();
   const nuevoEnlace = prompt("Nuevo enlace (opcional):", enlace);
 
-  // Eliminar el marcador original
-  const datosOriginales = { lat, lng, nota };
-  const marker = marcadores.find((m) => {
-    const pos = m.getLatLng();
-    return pos.lat === lat && pos.lng === lng;
-  });
-  if (marker) {
-    eliminarMarcador(marker, datosOriginales);
+  const nuevosDatos = { lat, lng, nota: nuevaNota, color: nuevoColor, enlace: nuevoEnlace };
+
+  await updateDoc(doc(db, "marcadores", id), nuevosDatos);
+
+  // Eliminar marcador anterior del mapa
+  const item = marcadores.find((m) => m.datos.id === id);
+  if (item) {
+    map.removeLayer(item.marker);
+    marcadores = marcadores.filter((m) => m.datos.id !== id);
   }
 
-  // Crear el nuevo marcador actualizado
-  const nuevosDatos = { lat, lng, nota: nuevaNota, color: nuevoColor, enlace: nuevoEnlace };
-  guardarMarcador(nuevosDatos.lat, nuevosDatos.lng, nuevosDatos.nota, nuevosDatos.color, nuevosDatos.enlace);
+  // Crear marcador actualizado
+  nuevosDatos.id = id;
   crearMarcador(nuevosDatos);
 };
 
+  // Crear el nuevo marcador actualizado
+import { getFirestore, collection, addDoc, getDocs, deleteDoc, updateDoc, doc } from "https://www.gstatic.com/firebasejs/10.5.2/firebase-firestore.js";
 
+
+async function editarMarcador(id, lat, lng, nota, color, enlace) {
+  const nuevaNota = prompt("Nueva descripción:", nota);
+  if (!nuevaNota) return;
+
+  const nuevoColor = prompt("Nuevo color (rojo, azul, verde, amarillo):", color).toLowerCase();
+  const nuevoEnlace = prompt("Nuevo enlace (opcional):", enlace);
+
+  const nuevosDatos = { lat, lng, nota: nuevaNota, color: nuevoColor, enlace: nuevoEnlace };
+
+  await updateDoc(doc(db, "marcadores", id), nuevosDatos);
+
+  // Eliminar marcador anterior del mapa
+  const item = marcadores.find((m) => m.datos.id === id);
+  if (item) {
+    map.removeLayer(item.marker);
+    marcadores = marcadores.filter((m) => m.datos.id !== id);
+  }
+
+  // Crear marcador actualizado
+  nuevosDatos.id = id;
+  crearMarcador(nuevosDatos);
+}
 
 // Cargar marcadores guardados
 cargarMarcadoresDesdeFirebase();
@@ -150,9 +168,6 @@ map.on('dblclick', async function (e) {
   crearMarcador(datos);
 });
 
-
-
-
 // Función global para borrar desde el botón
 window.borrarMarcador = function(lat, lng, nota) {
   const datos = { lat, lng, nota };
@@ -164,4 +179,5 @@ window.borrarMarcador = function(lat, lng, nota) {
     eliminarMarcador(marker, datos);
   }
 };
+
 
