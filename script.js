@@ -4,6 +4,19 @@ L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
   attribution: '&copy; OpenStreetMap contributors'
 }).addTo(map);
 map.doubleClickZoom.disable(); // Si quieres evitar que el mapa haga zoom al hacer doble clic
+async function cargarMarcadoresDesdeFirebase() {
+  const querySnapshot = await getDocs(collection(db, "marcadores"));
+  querySnapshot.forEach((doc) => {
+    const datos = doc.data();
+    crearMarcador({
+      lat: datos.lat,
+      lng: datos.lng,
+      nota: datos.nota,
+      color: datos.color,
+      enlace: datos.enlace || ""
+    });
+  });
+}
 
 
 let marcadores = []; // Lista de marcadores en el mapa
@@ -45,12 +58,11 @@ const iconos = {
 };
 
 
-function guardarMarcador(lat, lng, nota, color, enlace) {
+async function guardarMarcador(lat, lng, nota, color, enlace) {
   const nuevo = { lat, lng, nota, color, enlace };
-  let guardados = JSON.parse(localStorage.getItem("marcadores")) || [];
-  guardados.push(nuevo);
-  localStorage.setItem("marcadores", JSON.stringify(guardados));
+  await addDoc(collection(db, "marcadores"), nuevo);
 }
+
 
 function eliminarMarcador(marker, datos) {
   map.removeLayer(marker); // Quita del mapa
@@ -122,23 +134,22 @@ window.editarMarcador = function(lat, lng, nota, color, enlace) {
 
 
 // Cargar marcadores guardados
-const marcadoresGuardados = JSON.parse(localStorage.getItem("marcadores")) || [];
-marcadoresGuardados.forEach((datos) => crearMarcador(datos));
+cargarMarcadoresDesdeFirebase();
+
 
 // Agregar marcador al hacer clic
-map.on('dblclick', function (e) {
+map.on('dblclick', async function (e) {
   const nota = prompt("Describe esta zona:");
   if (!nota) return;
 
   const color = prompt("Color del marcador (rojo, azul, verde, amarillo):").toLowerCase();
-  //const icono = iconos[color] || iconos.rojo;
-
   const enlace = prompt("¿Quieres agregar un enlace? (opcional):");
 
   const datos = { lat: e.latlng.lat, lng: e.latlng.lng, nota, color, enlace };
-  guardarMarcador(datos.lat, datos.lng, datos.nota, datos.color, datos.enlace);
+  await guardarMarcador(datos.lat, datos.lng, datos.nota, datos.color, datos.enlace);
   crearMarcador(datos);
 });
+
 
 
 
@@ -153,3 +164,4 @@ window.borrarMarcador = function(lat, lng, nota) {
     eliminarMarcador(marker, datos);
   }
 };
+
