@@ -81,6 +81,8 @@ function crearMarcador(datos) {
 
 // Editar marcador
 window.editarMarcador = async function(lat, lng, nota, color, enlace) {
+  if (!usuarioAutenticado) return;
+
   const nuevaNota = prompt("Nueva descripción:", nota);
   if (!nuevaNota) return;
 
@@ -119,6 +121,8 @@ cargarMarcadoresFirestore((datos) => crearMarcador(datos));
 
 // Agregar marcador al hacer doble clic
 map.on('dblclick', async function(e) {
+  if (!usuarioAutenticado) return;
+
   const nota = prompt("Describe esta zona:");
   if (!nota) return;
 
@@ -129,4 +133,6 @@ map.on('dblclick', async function(e) {
   await guardarMarcador(datos.lat, datos.lng, datos.nota, datos.color, datos.enlace);
   crearMarcador(datos);
 });
+
+
 
