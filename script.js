@@ -1,8 +1,23 @@
 import {
   guardarMarcadorFirestore,
   cargarMarcadoresFirestore,
-  borrarMarcadorFirestore
+  borrarMarcadorFirestore,
+  auth,
+  iniciarSesion
 } from './firebase.js';
+
+let usuarioAutenticado = null;
+const correoAdmin = "tu-correo@gmail.com"; // ← pon aquí tu correo
+
+document.getElementById("login-btn").addEventListener("click", async () => {
+  const user = await iniciarSesion();
+  if (user?.email === correoAdmin) {
+    usuarioAutenticado = user;
+    alert("Modo edición activado");
+  } else {
+    alert("No tienes permisos para editar");
+  }
+});
 
 // Inicializar mapa
 const map = L.map('map').setView([18.555, -99.605], 14);
@@ -114,3 +129,4 @@ map.on('dblclick', async function(e) {
   await guardarMarcador(datos.lat, datos.lng, datos.nota, datos.color, datos.enlace);
   crearMarcador(datos);
 });
+
