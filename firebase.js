@@ -1,4 +1,6 @@
-import { initializeApp } from "https://www.gstatic.com/firebasejs/10.5.2/firebase-app.js";
+import {
+  initializeApp
+} from "https://www.gstatic.com/firebasejs/10.5.2/firebase-app.js";
 import {
   getFirestore,
   collection,
@@ -9,6 +11,12 @@ import {
   where,
   doc
 } from "https://www.gstatic.com/firebasejs/10.5.2/firebase-firestore.js";
+import {
+  getAuth,
+  signInWithPopup,
+  GoogleAuthProvider,
+  onAuthStateChanged
+} from "https://www.gstatic.com/firebasejs/10.5.2/firebase-auth.js";
 
 // Configuración de Firebase
 const firebaseConfig = {
@@ -19,6 +27,19 @@ const firebaseConfig = {
   messagingSenderId: "529569034869",
   appId: "1:529569034869:web:d67fe8eac365778600fe3c"
 };
+const app = initializeApp(firebaseConfig);
+export const db = getFirestore(app);
+export const auth = getAuth(app);
+const provider = new GoogleAuthProvider();
+
+export async function iniciarSesion() {
+  try {
+    const result = await signInWithPopup(auth, provider);
+    return result.user;
+  } catch (error) {
+    console.error("Error al iniciar sesión:", error);
+  }
+}
 
 // Inicializar Firebase
 const app = initializeApp(firebaseConfig);
@@ -61,3 +82,4 @@ export async function borrarMarcadorFirestore(datos) {
     console.error("Error al borrar marcador:", error);
   }
 }
+
