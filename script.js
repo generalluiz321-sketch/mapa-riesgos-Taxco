@@ -7,7 +7,7 @@ import {
 } from './firebase.js';
 
 let usuarioAutenticado = null;
-const correoAdmin = "tu-correo@gmail.com"; // ← pon aquí tu correo
+const correoAdmin = "generalluiz321@gmail.com"; // ← pon aquí tu correo
 
 document.getElementById("login-btn").addEventListener("click", async () => {
   const user = await iniciarSesion();
@@ -106,6 +106,8 @@ window.editarMarcador = async function(lat, lng, nota, color, enlace) {
 
 // Borrar marcador desde botón
 window.borrarMarcador = async function(lat, lng, nota) {
+  if (!usuarioAutenticado) return;
+
   const datos = { lat, lng, nota };
   const marker = marcadores.find((m) => {
     const pos = m.getLatLng();
@@ -133,6 +135,7 @@ map.on('dblclick', async function(e) {
   await guardarMarcador(datos.lat, datos.lng, datos.nota, datos.color, datos.enlace);
   crearMarcador(datos);
 });
+
 
 
 
