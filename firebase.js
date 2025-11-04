@@ -42,7 +42,7 @@ export async function iniciarSesion() {
 }
 
 // Inicializar Firebase
-const app = initializeApp(firebaseConfig);
+
 export const db = getFirestore(app);
 
 // Guardar marcador en Firestore
@@ -82,4 +82,5 @@ export async function borrarMarcadorFirestore(datos) {
     console.error("Error al borrar marcador:", error);
   }
 }
+
 
