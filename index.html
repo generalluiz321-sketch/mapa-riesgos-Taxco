@@ -18,33 +18,34 @@
     <li>🟩 <strong>Marcadores verdes</strong>: Representan <strong>puntos seguros</strong> o zonas de resguardo.</li>
   </ul>
 </section>
-
   <div id="map"></div>
 
+  <!-- Botón oculto para login -->
+  <button id="login-btn" title="Admin" style="
+    position: fixed;
+    bottom: 10px;
+    right: 10px;
+    padding: 4px 6px;
+    font-size: 10px;
+    background-color: #eee;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    cursor: pointer;
+    opacity: 0.5;
+    z-index: 999;
+  ">
+    🔒
+  </button>
 
   <!-- Leaflet -->
   <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
-  <script src="script.js"></script>
+
   <!-- Firebase y lógica -->
   <script type="module" src="firebase.js"></script>
   <script type="module" src="script.js"></script>
-  <button id="login-btn" title="Admin" style="
-  position: fixed;
-  bottom: 10px;
-  right: 10px;
-  padding: 4px 6px;
-  font-size: 10px;
-  background-color: #eee;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  cursor: pointer;
-  opacity: 0.5;
-  z-index: 999;
-">
-  🔒
-</button>
-
 </body>
 </html>
+
+
 
 
