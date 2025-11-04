@@ -66,18 +66,22 @@ function crearMarcador(datos) {
       </a>`;
   }
 
-  contenido += `
-    <button class="btn-editar" onclick="editarMarcador(${datos.lat}, ${datos.lng}, \`${datos.nota}\`, \`${datos.color}\`, \`${datos.enlace || ''}\`)">
-      <i class="fas fa-edit"></i> Editar
-    </button>
-    <button class="btn-borrar" onclick="borrarMarcador(${datos.lat}, ${datos.lng}, \`${datos.nota}\`)">
-      <i class="fas fa-trash"></i> Borrar
-    </button>
-  </div>`;
+  if (usuarioAutenticado?.email === correoAdmin) {
+    contenido += `
+      <button class="btn-editar" onclick="editarMarcador(${datos.lat}, ${datos.lng}, \`${datos.nota}\`, \`${datos.color}\`, \`${datos.enlace || ''}\`)">
+        <i class="fas fa-edit"></i> Editar
+      </button>
+      <button class="btn-borrar" onclick="borrarMarcador(${datos.lat}, ${datos.lng}, \`${datos.nota}\`)">
+        <i class="fas fa-trash"></i> Borrar
+      </button>
+    `;
+  }
 
+  contenido += `</div>`;
   marker.bindPopup(L.popup().setContent(contenido));
   marcadores.push(marker);
 }
+
 
 // Editar marcador
 window.editarMarcador = async function(lat, lng, nota, color, enlace) {
@@ -135,6 +139,7 @@ map.on('dblclick', async function(e) {
   await guardarMarcador(datos.lat, datos.lng, datos.nota, datos.color, datos.enlace);
   crearMarcador(datos);
 });
+
 
 
 
