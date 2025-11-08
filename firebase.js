@@ -2,6 +2,8 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
 import { getFirestore, collection, addDoc, onSnapshot, deleteDoc, doc } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 import { getAuth, GoogleAuthProvider, signInWithPopup } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+import { deleteDoc, doc } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+import { db } from "./firebase.js"
 
 // ⚠️ Reemplaza con tu configuración de Firebase
 const firebaseConfig = {
@@ -53,20 +55,13 @@ export function cargarMarcadoresFirestore(callback) {
   });
 }
 
-// 📌 Borrar marcador de Firestore
-export async function borrarMarcadorFirestore(datos) {
+// 📌 Borrar marcador de Firestore por ID
+export async function borrarMarcadorFirestore(docId) {
   try {
-    // Buscar documento por lat/lng/nota
-    const ref = collection(db, "markers");
-    onSnapshot(ref, snapshot => {
-      snapshot.forEach(docSnap => {
-        const d = docSnap.data();
-        if (d.lat === datos.lat && d.lng === datos.lng && d.nota === datos.nota) {
-          deleteDoc(doc(db, "markers", docSnap.id));
-        }
-      });
-    });
+    await deleteDoc(doc(db, "markers", docId));
+    console.log("Marcador borrado:", docId);
   } catch (error) {
     console.error("Error borrando marcador:", error);
   }
 }
+
