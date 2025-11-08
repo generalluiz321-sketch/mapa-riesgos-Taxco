@@ -7,11 +7,10 @@ import {
 } from './firebase.js';
 
 let usuarioAutenticado = null;
-const correoAdmin = "generalluiz321@gmail.com"; // ← pon aquí tu correo
 
-document.getElementById("89DYIFl4vfZQzHLqDm0qw1TwK0y1").addEventListener("click", async () => {
+document.getElementById("login-btn").addEventListener("click", async () => {
   const user = await iniciarSesion();
-  if (user?.uid === "TU_UID_ADMIN") {
+  if (user?.uid === "89DYIFl4vfZQzHLqDm0qw1TwK0y1") {
     usuarioAutenticado = user;
     alert("Modo edición activado");
   } else {
@@ -67,7 +66,7 @@ function crearMarcador(datos) {
       </a>`;
   }
 
-  if (usuarioAutenticado?.email === correoAdmin) {
+  if (usuarioAutenticado?.uid === "89DYIFl4vfZQzHLqDm0qw1TwK0y1") {
     contenido += `
       <button class="btn-editar" onclick="editarMarcador(${datos.lat}, ${datos.lng}, \`${datos.nota}\`, \`${datos.color}\`, \`${datos.enlace || ''}\`)">
         <i class="fas fa-edit"></i> Editar
@@ -119,12 +118,13 @@ window.borrarMarcador = async function(lat, lng, nota) {
     return pos.lat === lat && pos.lng === lng;
   });
   if (marker) {
-    await eliminarMarcador(marker, datos);
+    await borrarMarcadorFirestore(marker.docId);
   }
 };
 
 // Cargar marcadores al iniciar
-cargarMarcadoresFirestore((datos) => crearMarcador(datos));
+const marker = L.marker([datos.lat, datos.lng], { icon: icono }).addTo(map);
+marker.docId = datos.id; // guardar id del documento
 
 // Agregar marcador al hacer doble clic
 map.on('dblclick', async function(e) {
@@ -140,6 +140,7 @@ map.on('dblclick', async function(e) {
   await guardarMarcador(datos.lat, datos.lng, datos.nota, datos.color, datos.enlace);
   crearMarcador(datos);
 });
+
 
 
 
