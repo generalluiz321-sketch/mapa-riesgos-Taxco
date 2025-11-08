@@ -8,25 +8,28 @@ import {
 
 let usuarioAutenticado = null;
 
+// 🔒 Botón de login oculto
 document.getElementById("login-btn").addEventListener("click", async () => {
   const user = await iniciarSesion();
-  if (user?.uid === "89DYIFl4vfZQzHLqDm0qw1TwK0y1") {
+  if (user?.uid === "89DYIFl4vfZQzHLqDm0qw1TwK0y1") { // tu UID real
     usuarioAutenticado = user;
+    const btn = document.getElementById("login-btn");
+    btn.style.backgroundColor = "#4caf50";
+    btn.innerText = "✔ Admin";
     alert("Modo edición activado");
   } else {
     alert("No tienes permisos para editar");
   }
 });
 
-
-// Inicializar mapa
+// 🌍 Inicializar mapa
 const map = L.map('map').setView([18.555, -99.605], 14);
 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
   attribution: '&copy; OpenStreetMap contributors'
 }).addTo(map);
 map.doubleClickZoom.disable();
 
-// Íconos personalizados
+// 🎨 Íconos personalizados
 const iconos = {
   rojo: L.icon({ iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-red.png', shadowUrl: 'https://unpkg.com/leaflet@1.9.3/dist/images/marker-shadow.png', iconSize: [25, 41], iconAnchor: [12, 41], popupAnchor: [1, -34], shadowSize: [41, 41] }),
   azul: L.icon({ iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-blue.png', shadowUrl: 'https://unpkg.com/leaflet@1.9.3/dist/images/marker-shadow.png', iconSize: [25, 41], iconAnchor: [12, 41], popupAnchor: [1, -34], shadowSize: [41, 41] }),
@@ -36,26 +39,24 @@ const iconos = {
 
 let marcadores = [];
 
-// Guardar marcador en Firestore
+// 📌 Guardar marcador en Firestore
 async function guardarMarcador(lat, lng, nota, color, enlace) {
   const nuevo = { lat, lng, nota, color, enlace };
   await guardarMarcadorFirestore(nuevo);
 }
 
-// Eliminar marcador del mapa y Firestore
-async function eliminarMarcador(marker, datos) {
+// 🗑️ Eliminar marcador del mapa y Firestore
+async function eliminarMarcador(marker) {
   map.removeLayer(marker);
-  marcadores = marcadores.filter((m) => {
-    const pos = m.getLatLng();
-    return !(pos.lat === datos.lat && pos.lng === datos.lng);
-  });
-  await borrarMarcadorFirestore(datos);
+  marcadores = marcadores.filter(m => m !== marker);
+  await borrarMarcadorFirestore(marker.docId);
 }
 
-// Crear marcador visual
+// 📍 Crear marcador visual
 function crearMarcador(datos) {
   const icono = iconos[datos.color] || iconos.rojo;
   const marker = L.marker([datos.lat, datos.lng], { icon: icono }).addTo(map);
+  marker.docId = datos.id; // guardar id del documento Firestore
 
   let contenido = `<b>${datos.nota}</b><br><div class="boton-grupo">`;
 
@@ -82,8 +83,7 @@ function crearMarcador(datos) {
   marcadores.push(marker);
 }
 
-
-// Editar marcador
+// ✏️ Editar marcador
 window.editarMarcador = async function(lat, lng, nota, color, enlace) {
   if (!usuarioAutenticado) return;
 
@@ -93,14 +93,13 @@ window.editarMarcador = async function(lat, lng, nota, color, enlace) {
   const nuevoColor = prompt("Nuevo color (rojo, azul, verde, amarillo):", color).toLowerCase();
   const nuevoEnlace = prompt("Nuevo enlace (opcional):", enlace);
 
-  const datosOriginales = { lat, lng, nota };
-  const marker = marcadores.find((m) => {
+  const marker = marcadores.find(m => {
     const pos = m.getLatLng();
     return pos.lat === lat && pos.lng === lng;
   });
 
   if (marker) {
-    await eliminarMarcador(marker, datosOriginales);
+    await eliminarMarcador(marker);
   }
 
   const nuevosDatos = { lat, lng, nota: nuevaNota, color: nuevoColor, enlace: nuevoEnlace };
@@ -108,25 +107,23 @@ window.editarMarcador = async function(lat, lng, nota, color, enlace) {
   crearMarcador(nuevosDatos);
 };
 
-// Borrar marcador desde botón
+// 🗑️ Borrar marcador desde botón
 window.borrarMarcador = async function(lat, lng, nota) {
   if (!usuarioAutenticado) return;
 
-  const datos = { lat, lng, nota };
-  const marker = marcadores.find((m) => {
+  const marker = marcadores.find(m => {
     const pos = m.getLatLng();
     return pos.lat === lat && pos.lng === lng;
   });
   if (marker) {
-    await borrarMarcadorFirestore(marker.docId);
+    await eliminarMarcador(marker);
   }
 };
 
-// Cargar marcadores al iniciar
-const marker = L.marker([datos.lat, datos.lng], { icon: icono }).addTo(map);
-marker.docId = datos.id; // guardar id del documento
+// 📥 Cargar marcadores al iniciar
+cargarMarcadoresFirestore((datos) => crearMarcador(datos));
 
-// Agregar marcador al hacer doble clic
+// ➕ Agregar marcador al hacer doble clic
 map.on('dblclick', async function(e) {
   if (!usuarioAutenticado) return;
 
@@ -140,3 +137,5 @@ map.on('dblclick', async function(e) {
   await guardarMarcador(datos.lat, datos.lng, datos.nota, datos.color, datos.enlace);
   crearMarcador(datos);
 });
+
+
