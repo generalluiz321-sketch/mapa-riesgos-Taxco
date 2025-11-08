@@ -1,24 +1,9 @@
-import {
-  initializeApp
-} from "https://www.gstatic.com/firebasejs/10.5.2/firebase-app.js";
-import {
-  getFirestore,
-  collection,
-  addDoc,
-  getDocs,
-  deleteDoc,
-  query,
-  where,
-  doc
-} from "https://www.gstatic.com/firebasejs/10.5.2/firebase-firestore.js";
-import {
-  getAuth,
-  signInWithPopup,
-  GoogleAuthProvider,
-  onAuthStateChanged
-} from "https://www.gstatic.com/firebasejs/10.5.2/firebase-auth.js";
+// firebase.js
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+import { getFirestore, collection, addDoc, onSnapshot, deleteDoc, doc } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+import { getAuth, GoogleAuthProvider, signInWithPopup } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
 
-// Configuración de Firebase
+// ⚠️ Reemplaza con tu configuración de Firebase
 const firebaseConfig = {
   apiKey: "AIzaSyBV-8tyGvx7z51EenCnd2QoT9dvuvmch4Q",
   authDomain: "mapa-taxco.firebaseapp.com",
@@ -27,61 +12,61 @@ const firebaseConfig = {
   messagingSenderId: "529569034869",
   appId: "1:529569034869:web:d67fe8eac365778600fe3c"
 };
+
+// Inicializar Firebase
 const app = initializeApp(firebaseConfig);
 export const db = getFirestore(app);
 export const auth = getAuth(app);
+
+// Proveedor de Google
 const provider = new GoogleAuthProvider();
 
+// 🔑 Función de login con Google
 export async function iniciarSesion() {
   try {
     const result = await signInWithPopup(auth, provider);
-    return result.user;
+    return result.user; // devuelve el usuario autenticado
   } catch (error) {
-    console.error("Error al iniciar sesión:", error);
+    console.error("Error en login:", error);
+    return null;
   }
 }
 
-// Inicializar Firebase
-
-
-
-// Guardar marcador en Firestore
-export async function guardarMarcadorFirestore(marcador) {
+// 📌 Guardar marcador en Firestore
+export async function guardarMarcadorFirestore(datos) {
   try {
-    await addDoc(collection(db, "marcadores"), marcador);
+    await addDoc(collection(db, "markers"), datos);
   } catch (error) {
-    console.error("Error al guardar marcador:", error);
+    console.error("Error guardando marcador:", error);
   }
 }
 
-// Cargar todos los marcadores
-export async function cargarMarcadoresFirestore(callback) {
-  try {
-    const querySnapshot = await getDocs(collection(db, "marcadores"));
-    querySnapshot.forEach(doc => callback(doc.data()));
-  } catch (error) {
-    console.error("Error al cargar marcadores:", error);
-  }
+// 📌 Cargar marcadores en tiempo real
+export function cargarMarcadoresFirestore(callback) {
+  const ref = collection(db, "markers");
+  onSnapshot(ref, snapshot => {
+    snapshot.docChanges().forEach(change => {
+      if (change.type === "added") {
+        callback({ id: change.doc.id, ...change.doc.data() });
+      }
+    });
+  });
 }
 
-// Borrar marcador específico
+// 📌 Borrar marcador de Firestore
 export async function borrarMarcadorFirestore(datos) {
   try {
-    const q = query(
-      collection(db, "marcadores"),
-      where("lat", "==", datos.lat),
-      where("lng", "==", datos.lng),
-      where("nota", "==", datos.nota)
-    );
-
-    const snapshot = await getDocs(q);
-    snapshot.forEach(async (docu) => {
-      await deleteDoc(doc(db, "marcadores", docu.id));
+    // Buscar documento por lat/lng/nota
+    const ref = collection(db, "markers");
+    onSnapshot(ref, snapshot => {
+      snapshot.forEach(docSnap => {
+        const d = docSnap.data();
+        if (d.lat === datos.lat && d.lng === datos.lng && d.nota === datos.nota) {
+          deleteDoc(doc(db, "markers", docSnap.id));
+        }
+      });
     });
   } catch (error) {
-    console.error("Error al borrar marcador:", error);
+    console.error("Error borrando marcador:", error);
   }
 }
-
-
-
