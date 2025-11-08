@@ -6,32 +6,36 @@ import {
   iniciarSesion
 } from './firebase.js';
 
-import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+import { onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
 
 let usuarioAutenticado = null;
 let marcadores = [];
 
 // 🔄 Detectar cambios de sesión (persistencia al refrescar)
 onAuthStateChanged(auth, user => {
-  const btn = document.getElementById("login-btn");
+  const loginBtn = document.getElementById("login-btn");
+  const logoutBtn = document.getElementById("logout-btn");
+
   if (user?.uid === "89DYIFl4vfZQzHLqDm0qw1TwK0y1") { // tu UID real
     usuarioAutenticado = user;
-    btn.style.backgroundColor = "#4caf50";
-    btn.innerText = "✔ Admin3";
+    loginBtn.style.backgroundColor = "#4caf50";
+    loginBtn.innerText = "✔ Admin4";
+    logoutBtn.style.display = "block"; // mostrar botón rojo
   } else {
     usuarioAutenticado = null;
-    btn.style.backgroundColor = "#eee";
-    btn.innerText = "🔒";
+    loginBtn.style.backgroundColor = "#eee";
+    loginBtn.innerText = "🔒";
+    logoutBtn.style.display = "none"; // ocultar botón rojo
   }
 
   // 🔄 Refrescar popups de todos los marcadores
   marcadores.forEach(marker => {
-    const datos = marker.datos; // datos originales guardados
+    const datos = marker.datos;
     marker.bindPopup(L.popup().setContent(generarPopup(datos)));
   });
 });
 
-// 🔒 Botón de login oculto
+// 🔒 Botón de login
 document.getElementById("login-btn").addEventListener("click", async () => {
   const user = await iniciarSesion();
   if (user?.uid === "89DYIFl4vfZQzHLqDm0qw1TwK0y1") {
@@ -40,8 +44,19 @@ document.getElementById("login-btn").addEventListener("click", async () => {
     btn.style.backgroundColor = "#4caf50";
     btn.innerText = "✔ Admin";
     alert("Modo edición activado");
+    document.getElementById("logout-btn").style.display = "block";
   } else {
     alert("No tienes permisos para editar");
+  }
+});
+
+// 🔓 Botón de logout
+document.getElementById("logout-btn").addEventListener("click", async () => {
+  try {
+    await signOut(auth);
+    alert("Sesión cerrada");
+  } catch (error) {
+    console.error("Error cerrando sesión:", error);
   }
 });
 
@@ -63,7 +78,7 @@ const iconos = {
 // 📌 Guardar marcador en Firestore y devolver datos con id
 async function guardarMarcador(lat, lng, nota, color, enlace) {
   const nuevo = { lat, lng, nota, color, enlace };
-  const id = await guardarMarcadorFirestore(nuevo); // devuelve el docId
+  const id = await guardarMarcadorFirestore(nuevo);
   return { id, ...nuevo };
 }
 
@@ -104,8 +119,8 @@ function generarPopup(datos) {
 function crearMarcador(datos) {
   const icono = iconos[datos.color] || iconos.rojo;
   const marker = L.marker([datos.lat, datos.lng], { icon: icono }).addTo(map);
-  marker.docId = datos.id;   // guardar id del documento Firestore
-  marker.datos = datos;      // guardar datos originales para refrescar popup
+  marker.docId = datos.id;
+  marker.datos = datos;
 
   marker.bindPopup(L.popup().setContent(generarPopup(datos)));
   marcadores.push(marker);
@@ -163,4 +178,5 @@ map.on('dblclick', async function(e) {
   const datos = await guardarMarcador(e.latlng.lat, e.latlng.lng, nota, color, enlace);
   crearMarcador(datos);
 });
+
 
