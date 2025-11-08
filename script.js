@@ -9,15 +9,16 @@ import {
 let usuarioAutenticado = null;
 const correoAdmin = "generalluiz321@gmail.com"; // ← pon aquí tu correo
 
-document.getElementById("login-btn").addEventListener("click", async () => {
+document.getElementById("89DYIFl4vfZQzHLqDm0qw1TwK0y1").addEventListener("click", async () => {
   const user = await iniciarSesion();
-  if (user?.email === correoAdmin) {
+  if (user?.uid === "TU_UID_ADMIN") {
     usuarioAutenticado = user;
     alert("Modo edición activado");
   } else {
     alert("No tienes permisos para editar");
   }
 });
+
 
 // Inicializar mapa
 const map = L.map('map').setView([18.555, -99.605], 14);
@@ -139,6 +140,7 @@ map.on('dblclick', async function(e) {
   await guardarMarcador(datos.lat, datos.lng, datos.nota, datos.color, datos.enlace);
   crearMarcador(datos);
 });
+
 
 
 
