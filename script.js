@@ -17,7 +17,7 @@ onAuthStateChanged(auth, user => {
   if (user?.uid === "89DYIFl4vfZQzHLqDm0qw1TwK0y1") { // tu UID real
     usuarioAutenticado = user;
     btn.style.backgroundColor = "#4caf50";
-    btn.innerText = "✔ Admin02";
+    btn.innerText = "✔ Admin";
   } else {
     usuarioAutenticado = null;
     btn.style.backgroundColor = "#eee";
@@ -60,10 +60,11 @@ const iconos = {
   amarillo: L.icon({ iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-yellow.png', shadowUrl: 'https://unpkg.com/leaflet@1.9.3/dist/images/marker-shadow.png', iconSize: [25, 41], iconAnchor: [12, 41], popupAnchor: [1, -34], shadowSize: [41, 41] })
 };
 
-// 📌 Guardar marcador en Firestore
+// 📌 Guardar marcador en Firestore y devolver datos con id
 async function guardarMarcador(lat, lng, nota, color, enlace) {
   const nuevo = { lat, lng, nota, color, enlace };
-  await guardarMarcadorFirestore(nuevo);
+  const id = await guardarMarcadorFirestore(nuevo); // devuelve el docId
+  return { id, ...nuevo };
 }
 
 // 🗑️ Eliminar marcador del mapa y Firestore
@@ -129,8 +130,7 @@ window.editarMarcador = async function(lat, lng, nota, color, enlace) {
     await eliminarMarcador(marker);
   }
 
-  const nuevosDatos = { lat, lng, nota: nuevaNota, color: nuevoColor, enlace: nuevoEnlace };
-  await guardarMarcador(nuevosDatos.lat, nuevosDatos.lng, nuevosDatos.nota, nuevosDatos.color, nuevosDatos.enlace);
+  const nuevosDatos = await guardarMarcador(lat, lng, nuevaNota, nuevoColor, nuevoEnlace);
   crearMarcador(nuevosDatos);
 };
 
@@ -160,9 +160,6 @@ map.on('dblclick', async function(e) {
   const color = prompt("Color del marcador (rojo, azul, verde, amarillo):").toLowerCase();
   const enlace = prompt("¿Quieres agregar un enlace? (opcional):");
 
-  const datos = { lat: e.latlng.lat, lng: e.latlng.lng, nota, color, enlace };
-  await guardarMarcador(datos.lat, datos.lng, datos.nota, datos.color, datos.enlace);
+  const datos = await guardarMarcador(e.latlng.lat, e.latlng.lng, nota, color, enlace);
   crearMarcador(datos);
 });
-
-
