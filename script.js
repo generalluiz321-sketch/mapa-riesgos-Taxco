@@ -6,12 +6,35 @@ import {
   iniciarSesion
 } from './firebase.js';
 
+import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+
 let usuarioAutenticado = null;
+let marcadores = [];
+
+// 🔄 Detectar cambios de sesión (persistencia al refrescar)
+onAuthStateChanged(auth, user => {
+  const btn = document.getElementById("login-btn");
+  if (user?.uid === "89DYIFl4vfZQzHLqDm0qw1TwK0y1") { // tu UID real
+    usuarioAutenticado = user;
+    btn.style.backgroundColor = "#4caf50";
+    btn.innerText = "✔ Admin";
+  } else {
+    usuarioAutenticado = null;
+    btn.style.backgroundColor = "#eee";
+    btn.innerText = "🔒";
+  }
+
+  // 🔄 Refrescar popups de todos los marcadores
+  marcadores.forEach(marker => {
+    const datos = marker.datos; // datos originales guardados
+    marker.bindPopup(L.popup().setContent(generarPopup(datos)));
+  });
+});
 
 // 🔒 Botón de login oculto
 document.getElementById("login-btn").addEventListener("click", async () => {
   const user = await iniciarSesion();
-  if (user?.uid === "89DYIFl4vfZQzHLqDm0qw1TwK0y1") { // tu UID real
+  if (user?.uid === "89DYIFl4vfZQzHLqDm0qw1TwK0y1") {
     usuarioAutenticado = user;
     const btn = document.getElementById("login-btn");
     btn.style.backgroundColor = "#4caf50";
@@ -37,8 +60,6 @@ const iconos = {
   amarillo: L.icon({ iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-yellow.png', shadowUrl: 'https://unpkg.com/leaflet@1.9.3/dist/images/marker-shadow.png', iconSize: [25, 41], iconAnchor: [12, 41], popupAnchor: [1, -34], shadowSize: [41, 41] })
 };
 
-let marcadores = [];
-
 // 📌 Guardar marcador en Firestore
 async function guardarMarcador(lat, lng, nota, color, enlace) {
   const nuevo = { lat, lng, nota, color, enlace };
@@ -52,12 +73,8 @@ async function eliminarMarcador(marker) {
   await borrarMarcadorFirestore(marker.docId);
 }
 
-// 📍 Crear marcador visual
-function crearMarcador(datos) {
-  const icono = iconos[datos.color] || iconos.rojo;
-  const marker = L.marker([datos.lat, datos.lng], { icon: icono }).addTo(map);
-  marker.docId = datos.id; // guardar id del documento Firestore
-
+// 📍 Generar contenido del popup
+function generarPopup(datos) {
   let contenido = `<b>${datos.nota}</b><br><div class="boton-grupo">`;
 
   if (datos.enlace) {
@@ -79,7 +96,17 @@ function crearMarcador(datos) {
   }
 
   contenido += `</div>`;
-  marker.bindPopup(L.popup().setContent(contenido));
+  return contenido;
+}
+
+// 📍 Crear marcador visual
+function crearMarcador(datos) {
+  const icono = iconos[datos.color] || iconos.rojo;
+  const marker = L.marker([datos.lat, datos.lng], { icon: icono }).addTo(map);
+  marker.docId = datos.id;   // guardar id del documento Firestore
+  marker.datos = datos;      // guardar datos originales para refrescar popup
+
+  marker.bindPopup(L.popup().setContent(generarPopup(datos)));
   marcadores.push(marker);
 }
 
@@ -137,5 +164,3 @@ map.on('dblclick', async function(e) {
   await guardarMarcador(datos.lat, datos.lng, datos.nota, datos.color, datos.enlace);
   crearMarcador(datos);
 });
-
-
