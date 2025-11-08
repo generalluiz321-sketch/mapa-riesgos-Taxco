@@ -17,7 +17,7 @@ onAuthStateChanged(auth, user => {
   if (user?.uid === "89DYIFl4vfZQzHLqDm0qw1TwK0y1") { // tu UID real
     usuarioAutenticado = user;
     btn.style.backgroundColor = "#4caf50";
-    btn.innerText = "✔ Admin";
+    btn.innerText = "✔ Admin3";
   } else {
     usuarioAutenticado = null;
     btn.style.backgroundColor = "#eee";
@@ -163,3 +163,4 @@ map.on('dblclick', async function(e) {
   const datos = await guardarMarcador(e.latlng.lat, e.latlng.lng, nota, color, enlace);
   crearMarcador(datos);
 });
+
