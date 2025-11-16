@@ -30,7 +30,7 @@ html, body, #map {
 #infoWindow {
   position: absolute;
   top: 50px;
-  right: 50px;
+  left: 50px;
   width: 320px;
   background: rgba(255,255,255,0.95);
   border: 1px solid #ccc;
@@ -123,6 +123,7 @@ html, body, #map {
   margin-bottom: 4px;
   cursor: pointer;
 }
+
 
 
 
