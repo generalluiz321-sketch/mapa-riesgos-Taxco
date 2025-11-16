@@ -79,6 +79,9 @@ const esriWorldImagery = L.tileLayer('https://server.arcgisonline.com/ArcGIS/res
   attribution: 'Tiles © Esri — Source: Esri, Maxar, Earthstar Geographics'
 });
 
+// Capas adicionales con leaflet-providers
+const stadiaAlidadeSmoothDark = L.tileLayer.provider('Stadia.AlidadeSmoothDark');
+const cartoDarkMatter = L.tileLayer.provider('CartoDB.DarkMatter');
 
 // Capas para temas
 const osmStandard = standard;
@@ -95,13 +98,18 @@ osmStandard.addTo(map);
 // Control de capas
 const baseMaps = {
   "Estándar": standard,
-  "Satelite": esriWorldImagery
+  "Satelite": esriWorldImagery,
   "Relieve 1": cycle,
-  "Reliev 2": openTopoMap,
-  "Humanitarian": humanitarian
-
+  "Relieve 2": openTopoMap,
+  "Humanitarian": humanitarian,
+  "Stadia Dark": stadiaDark,
+  "Esri Gray": esriGray,
+  "Stadia Alidade Smooth Dark": stadiaAlidadeSmoothDark,
+  "CartoDB Dark Matter": cartoDarkMatter
 };
+
 const capasControl = L.control.layers(baseMaps).addTo(map);
+
 
 // Forzar que se abra/cierre solo al presionar
 const capasContainer = capasControl.getContainer();
@@ -246,6 +254,7 @@ themeBtn.addEventListener("click", () => {
     themeBtn.innerText = "🌫️ Gris";
   }
 });
+
 
 
 
