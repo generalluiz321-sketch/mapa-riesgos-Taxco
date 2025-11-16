@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Mapa de Riesgo de Taxco</title>
+  <title>Mapa de Riesgo de Taxco8</title>
   <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <link rel="stylesheet" href="style.css" />
@@ -9,47 +9,36 @@
 <body>
   <!-- Encabezado con título y botón de tema -->
   <div class="header">
-    <h1>Mapa de Riesgo de Taxco7</h1>
+    <h1>Mapa de Riesgo de Taxco</h1>
     <button id="theme-btn">🌞 Claro</button>
   </div>
-  
+
   <section id="leyenda" style="margin-top: 20px; padding: 1em; background-color: #f9f9f9; border-left: 5px solid #444;">
-  <h2 style="margin-bottom: 0.5em;">🗣️ Bienvenidos, tasqueños</h2>
-  <p>En este foro compartimos las ubicaciones de atentados criminales, así como información relevante sobre la situación actual y eventos ocurridos en nuestra comunidad.</p>
-  <ul style="list-style: none; padding-left: 0;">
-    <li>🟥 <strong>Marcadores rojos</strong>: Indican zonas de <strong>peligro extremo</strong> o situaciones <strong>delicadas</strong>.</li>
-    <li>🟨 <strong>Marcadores amarillos</strong>: Señalan áreas con <strong>riesgo leve</strong> o eventos menores.</li>
-    <li>🟦 <strong>Marcadores azules</strong>: Proveen <strong>información específica</strong> sobre un hecho o situación.</li>
-    <li>🟩 <strong>Marcadores verdes</strong>: Representan <strong>puntos seguros</strong> o zonas de resguardo.</li>
-  </ul>
-</section>
+    <h2 style="margin-bottom: 0.5em;">🗣️ Bienvenidos, tasqueños</h2>
+    <p>En este foro compartimos las ubicaciones de atentados criminales, así como información relevante sobre la situación actual y eventos ocurridos en nuestra comunidad.</p>
+    <ul style="list-style: none; padding-left: 0;">
+      <li>🟥 <strong>Marcadores rojos</strong>: Indican zonas de <strong>peligro extremo</strong> o situaciones <strong>delicadas</strong>.</li>
+      <li>🟨 <strong>Marcadores amarillos</strong>: Señalan áreas con <strong>riesgo leve</strong> o eventos menores.</li>
+      <li>🟦 <strong>Marcadores azules</strong>: Proveen <strong>información específica</strong> sobre un hecho o situación.</li>
+      <li>🟩 <strong>Marcadores verdes</strong>: Representan <strong>puntos seguros</strong> o zonas de resguardo.</li>
+    </ul>
+  </section>
+
   <div id="map"></div>
   
-<!-- Botón claro oscuro -->
-  <button id="theme-btn">🌗 Cambiar tema</button>
-  
-  <!-- Botón oculto para login -->
-
-<button id="login-btn" title="Admin" style="
-  ">
-    🔒
-  </button>
-
-  <button id="logout-btn" title="Cerrar sesión" style="
-  ">
-    🔓 Logout
-</button>
-
-
+  <!-- Botones de login/logout -->
+  <button id="login-btn" title="Admin">🔒</button>
+  <button id="logout-btn" title="Cerrar sesión">🔓 Logout</button>
 
   <!-- Leaflet -->
   <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
 
   <!-- Firebase y lógica -->
-  
   <script type="module" src="script.js"></script>
 </body>
 </html>
+
+
 
 
 
