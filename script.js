@@ -80,32 +80,19 @@ const esriWorldImagery = L.tileLayer('https://server.arcgisonline.com/ArcGIS/res
 });
 
 // Capas adicionales con leaflet-providers
-const stadiaAlidadeSmoothDark = L.tileLayer.provider('Stadia.AlidadeSmoothDark');
 const cartoDarkMatter = L.tileLayer.provider('CartoDB.DarkMatter');
 
-// Capas para temas
-const osmStandard = standard;
-const stadiaDark = L.tileLayer('https://tiles.stadiamaps.com/tiles/alidade_smooth_dark/{z}/{x}/{y}{r}.png', {
-  attribution: '© Stadia Maps, © OpenMapTiles, © OpenStreetMap contributors'
-});
-const esriGray = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Light_Gray_Base/MapServer/tile/{z}/{y}/{x}', {
-  attribution: 'Tiles © Esri, HERE, Garmin, © OpenStreetMap contributors'
-});
-
 // Añadir capa estándar por defecto
-osmStandard.addTo(map);
+standard.addTo(map);
 
-// Control de capas
+// Control de capas (solo las que quieres mantener)
 const baseMaps = {
   "Estándar": standard,
   "Satelite": esriWorldImagery,
   "Relieve 1": cycle,
   "Relieve 2": openTopoMap,
   "Humanitarian": humanitarian,
-  "Stadia Dark": stadiaDark,
-  "Esri Gray": esriGray,
-  "Stadia Alidade Smooth Dark": stadiaAlidadeSmoothDark,
-  "CartoDB Dark Matter": cartoDarkMatter
+  "Dark": cartoDarkMatter
 };
 
 const capasControl = L.control.layers(baseMaps).addTo(map);
@@ -267,6 +254,7 @@ themeBtn.addEventListener("click", () => {
     themeBtn.innerText = "🌫️ Gris";
   }
 });
+
 
 
 
