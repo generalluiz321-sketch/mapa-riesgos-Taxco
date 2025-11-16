@@ -61,6 +61,8 @@ document.getElementById("logout-btn").addEventListener("click", async () => {
 
 // 🌍 Inicializar mapa
 const map = L.map('map').setView([18.555, -99.605], 14);
+// 🔑 Tu API key de MapTiler
+const apiKey = 'Xx4vT3arRLcdLqF0lKbj';
 
 // Capas base
 const standard = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -87,6 +89,18 @@ const esriWorldImagery = L.tileLayer('https://server.arcgisonline.com/ArcGIS/res
 const esriWorldPhysical = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Physical_Map/MapServer/tile/{z}/{y}/{x}', {
   attribution: 'Tiles © Esri — Source: Esri, USGS, NOAA'
 });
+const maptilerBasic = L.tileLayer(`https://api.maptiler.com/maps/basic/{z}/{x}/{y}.png?key=${apiKey}`, {
+  attribution: '© MapTiler © OpenStreetMap contributors'
+});
+const maptilerBright = L.tileLayer(`https://api.maptiler.com/maps/bright/{z}/{x}/{y}.png?key=${apiKey}`, {
+  attribution: '© MapTiler © OpenStreetMap contributors'
+});
+const maptilerDark = L.tileLayer(`https://api.maptiler.com/maps/darkmatter/{z}/{x}/{y}.png?key=${apiKey}`, {
+  attribution: '© MapTiler © OpenStreetMap contributors'
+});
+const maptilerPastel = L.tileLayer(`https://api.maptiler.com/maps/pastel/{z}/{x}/{y}.png?key=${apiKey}`, {
+  attribution: '© MapTiler © OpenStreetMap contributors'
+});
 
 // Capas para temas
 const osmStandard = standard;
@@ -110,6 +124,10 @@ const baseMaps = {
   "Stadia Satellite": stadiaSatellite,
   "Esri World Imagery": esriWorldImagery,
   "Esri World Physical": esriWorldPhysical
+  "MapTiler Basic": maptilerBasic,
+  "MapTiler Bright": maptilerBright,
+  "MapTiler Dark": maptilerDark,
+  "MapTiler Pastel": maptilerPastel
 };
 const capasControl = L.control.layers(baseMaps).addTo(map);
 
@@ -256,6 +274,7 @@ themeBtn.addEventListener("click", () => {
     themeBtn.innerText = "🌫️ Gris";
   }
 });
+
 
 
 
