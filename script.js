@@ -30,7 +30,14 @@ const baseMaps = {
 };
 
 // Añadir control de capas al mapa (solo estilos)
-L.control.layers(baseMaps).addTo(map);
+const capasControl = L.control.layers(baseMaps).addTo(map);
+
+// 🔧 Forzar que el menú de capas se abra/cierre con clic
+const capasContainer = capasControl.getContainer();
+capasContainer.addEventListener("click", function (e) {
+  e.stopPropagation();
+  capasContainer.classList.toggle("leaflet-control-layers-expanded");
+});
 
 // Desactivar zoom con doble clic
 map.doubleClickZoom.disable();
@@ -69,7 +76,7 @@ map.on('dblclick', async function(e) {
 
 // 🔘 Botón para activar/desactivar marcadores
 const toggleBtn = document.createElement("button");
-toggleBtn.innerText = "🗺️ Mostrar/Ocultar marcadores";
+toggleBtn.innerText = "🗺️ Ocultar marcadores";
 toggleBtn.style.position = "absolute";
 toggleBtn.style.top = "10px";
 toggleBtn.style.left = "10px";
@@ -92,6 +99,7 @@ toggleBtn.addEventListener("click", () => {
   }
   marcadoresVisibles = !marcadoresVisibles;
 });
+
 
 
 
