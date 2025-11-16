@@ -29,7 +29,7 @@ html, body, #map {
 /* Ventana de información */
 #infoWindow {
   position: absolute;
-  top: 50px;
+  top: 10px;
   left: 50px;
   width: 320px;
   background: rgba(255,255,255,0.95);
@@ -123,6 +123,7 @@ html, body, #map {
   margin-bottom: 4px;
   cursor: pointer;
 }
+
 
 
 
