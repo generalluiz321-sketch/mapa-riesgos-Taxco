@@ -113,14 +113,18 @@ const baseMaps = {
 };
 
 // Añadir control de capas al mapa
+// Control de capas
 const capasControl = L.control.layers(baseMaps).addTo(map);
 
-// 🔧 Forzar que el menú de capas se abra/cierre solo al hacer clic
+// Forzar que se abra/cierre solo al presionar (clic/tap)
 const capasContainer = capasControl.getContainer();
+
+// Evitar que se abra por hover en móviles
 capasContainer.addEventListener("click", function (e) {
   e.stopPropagation();
   capasContainer.classList.toggle("leaflet-control-layers-expanded");
 });
+
 
 // Desactivar zoom con doble clic
 map.doubleClickZoom.disable();
@@ -237,6 +241,7 @@ map.on('dblclick', async function(e) {
   const datos = await guardarMarcador(e.latlng.lat, e.latlng.lng, nota, color, enlace);
   crearMarcador(datos);
 });
+
 
 
 
