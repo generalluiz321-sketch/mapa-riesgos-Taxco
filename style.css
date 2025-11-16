@@ -92,4 +92,44 @@ button i {
   height: 600px;
   width: 100%;
 }
+/* 🎨 Botón de capas Leaflet */
+.leaflet-control-layers {
+  background-color: #fff;       /* Fondo blanco */
+  border: 1px solid #ccc;       /* Borde gris */
+  border-radius: 6px;           /* Bordes redondeados */
+  box-shadow: 0 2px 6px rgba(0,0,0,0.2); /* Sombra ligera */
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+}
+
+/* Icono del botón cerrado */
+.leaflet-control-layers-toggle {
+  background-image: url("https://cdn-icons-png.flaticon.com/512/854/854878.png"); /* 🗺️ icono mapa */
+  background-size: 20px 20px;
+  background-repeat: no-repeat;
+  background-position: center;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+}
+
+/* Hover para dar feedback */
+.leaflet-control-layers:hover {
+  background-color: #f9f9f9;
+  border-color: #999;
+}
+
+/* Caja desplegada */
+.leaflet-control-layers-expanded {
+  padding: 8px;
+  font-size: 12px;
+}
+
+.leaflet-control-layers-expanded label {
+  display: block;
+  margin-bottom: 4px;
+  cursor: pointer;
+}
+
+
 
