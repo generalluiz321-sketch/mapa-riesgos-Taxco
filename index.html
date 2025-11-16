@@ -1,32 +1,33 @@
 <!DOCTYPE html>
-<html>
+<html lang="es">
 <head>
+  <meta charset="UTF-8">
   <title>Mapa de Riesgo de Taxco</title>
   <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <!-- Encabezado con título y botón de tema -->
-  <div class="header">
-    <h1>Mapa de Riesgo de Taxco3</h1>
-    <button id="theme-btn">🌞 Claro</button>
+  <!-- Mapa pantalla completa -->
+  <div id="map"></div>
+
+  <!-- Botón de información -->
+  <button id="infoBtn" title="Información">ℹ️</button>
+
+  <!-- Ventana de información -->
+  <div id="infoWindow">
+    <button id="closeInfo">✖</button>
+    <h2>Mapa de Riesgo de Taxco</h2>
+    <p>🗣️ Bienvenidos, tasqueños<br>
+    En este foro compartimos las ubicaciones de atentados criminales, así como información relevante sobre la situación actual y eventos ocurridos en nuestra comunidad.</p>
+    <p>
+      🟥 Marcadores rojos: Indican zonas de peligro extremo o situaciones delicadas.<br>
+      🟨 Marcadores amarillos: Señalan áreas con riesgo leve o eventos menores.<br>
+      🟦 Marcadores azules: Proveen información específica sobre un hecho o situación.<br>
+      🟩 Marcadores verdes: Representan puntos seguros o zonas de resguardo.
+    </p>
   </div>
 
-<section id="leyenda">
-  <h2>🗣️ Bienvenidos, tasqueños</h2>
-  <p>En este foro compartimos las ubicaciones de atentados criminales, así como información relevante sobre la situación actual y eventos ocurridos en nuestra comunidad.</p>
-  <ul>
-    <li>🟥 <strong>Marcadores rojos</strong>: Indican zonas de <strong>peligro extremo</strong> o situaciones <strong>delicadas</strong>.</li>
-    <li>🟨 <strong>Marcadores amarillos</strong>: Señalan áreas con <strong>riesgo leve</strong> o eventos menores.</li>
-    <li>🟦 <strong>Marcadores azules</strong>: Proveen <strong>información específica</strong> sobre un hecho o situación.</li>
-    <li>🟩 <strong>Marcadores verdes</strong>: Representan <strong>puntos seguros</strong> o zonas de resguardo.</li>
-  </ul>
-</section>
-
-
-  <div id="map"></div>
-  
   <!-- Botones de login/logout -->
   <button id="login-btn" title="Admin">🔒</button>
   <button id="logout-btn" title="Cerrar sesión">🔓 Logout</button>
@@ -39,36 +40,6 @@
   <script type="module" src="script.js"></script>
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
