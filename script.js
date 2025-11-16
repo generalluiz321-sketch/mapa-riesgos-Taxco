@@ -95,10 +95,10 @@ osmStandard.addTo(map);
 // Control de capas
 const baseMaps = {
   "Estándar": standard,
+  "Satelite": esriWorldImagery
   "Relieve 1": cycle,
   "Reliev 2": openTopoMap,
-  "Humanitarian": humanitarian,
-  "Esri World Imagery": esriWorldImagery
+  "Humanitarian": humanitarian
 
 };
 const capasControl = L.control.layers(baseMaps).addTo(map);
@@ -246,6 +246,7 @@ themeBtn.addEventListener("click", () => {
     themeBtn.innerText = "🌫️ Gris";
   }
 });
+
 
 
 
