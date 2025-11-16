@@ -72,9 +72,6 @@ const cycle = L.tileLayer('https://{s}.tile-cyclosm.openstreetmap.fr/cyclosm/{z}
 const humanitarian = L.tileLayer('https://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png', {
   attribution: '© OpenStreetMap, Humanitarian'
 });
-const transport = L.tileLayer('https://{s}.tile2.opencyclemap.org/transport/{z}/{x}/{y}.png', {
-  attribution: '© OpenStreetMap, Transport Map'
-});
 const openTopoMap = L.tileLayer('https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png', {
   attribution: 'Map data © OpenStreetMap, SRTM | Style © OpenTopoMap'
 });
@@ -105,7 +102,6 @@ const baseMaps = {
   "Estándar": standard,
   "CycleOSM": cycle,
   "Humanitarian": humanitarian,
-  "Transporte": transport,
   "OpenTopoMap": openTopoMap,
   "Stadia Satellite": stadiaSatellite,
   "Esri World Imagery": esriWorldImagery,
@@ -257,6 +253,7 @@ themeBtn.addEventListener("click", () => {
     themeBtn.innerText = "🌫️ Gris";
   }
 });
+
 
 
 
