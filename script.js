@@ -11,31 +11,30 @@ import { onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/
 let usuarioAutenticado = null;
 let marcadores = [];
 
-// 🔄 Detectar cambios de sesión (persistencia al refrescar)
+// 🔄 Detectar cambios de sesión
 onAuthStateChanged(auth, user => {
   const loginBtn = document.getElementById("login-btn");
   const logoutBtn = document.getElementById("logout-btn");
 
-  if (user?.uid === "89DYIFl4vfZQzHLqDm0qw1TwK0y1") { // tu UID real
+  if (user?.uid === "89DYIFl4vfZQzHLqDm0qw1TwK0y1") {
     usuarioAutenticado = user;
     loginBtn.style.backgroundColor = "#4caf50";
     loginBtn.innerText = "✔ Admin4";
-    logoutBtn.style.display = "block"; // mostrar botón rojo
+    logoutBtn.style.display = "block";
   } else {
     usuarioAutenticado = null;
     loginBtn.style.backgroundColor = "#eee";
     loginBtn.innerText = "🔒";
-    logoutBtn.style.display = "none"; // ocultar botón rojo
+    logoutBtn.style.display = "none";
   }
 
-  // 🔄 Refrescar popups de todos los marcadores
   marcadores.forEach(marker => {
     const datos = marker.datos;
     marker.bindPopup(L.popup().setContent(generarPopup(datos)));
   });
 });
 
-// 🔒 Botón de login
+// 🔒 Botón login
 document.getElementById("login-btn").addEventListener("click", async () => {
   const user = await iniciarSesion();
   if (user?.uid === "89DYIFl4vfZQzHLqDm0qw1TwK0y1") {
@@ -50,7 +49,7 @@ document.getElementById("login-btn").addEventListener("click", async () => {
   }
 });
 
-// 🔓 Botón de logout
+// 🔓 Botón logout
 document.getElementById("logout-btn").addEventListener("click", async () => {
   try {
     await signOut(auth);
@@ -61,46 +60,47 @@ document.getElementById("logout-btn").addEventListener("click", async () => {
 });
 
 // 🌍 Inicializar mapa
-// 🌍 Inicializar mapa con varias capas base
 const map = L.map('map').setView([18.555, -99.605], 14);
 
-// Definir capas base
+// Capas base
 const standard = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
   attribution: '© OpenStreetMap contributors'
 });
-
 const cycle = L.tileLayer('https://{s}.tile-cyclosm.openstreetmap.fr/cyclosm/{z}/{x}/{y}.png', {
   attribution: '© OpenStreetMap, CyclOSM'
 });
-
 const humanitarian = L.tileLayer('https://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png', {
   attribution: '© OpenStreetMap, Humanitarian'
 });
-
 const transport = L.tileLayer('https://{s}.tile2.opencyclemap.org/transport/{z}/{x}/{y}.png', {
   attribution: '© OpenStreetMap, Transport Map'
 });
-
 const openTopoMap = L.tileLayer('https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png', {
   attribution: 'Map data © OpenStreetMap, SRTM | Style © OpenTopoMap'
 });
-
 const stadiaSatellite = L.tileLayer('https://tiles.stadiamaps.com/tiles/alidade-satellite/{z}/{x}/{y}{r}.jpg', {
   attribution: '© Stadia Maps, © OpenMapTiles, © OpenStreetMap contributors'
 });
-
 const esriWorldImagery = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
   attribution: 'Tiles © Esri — Source: Esri, Maxar, Earthstar Geographics'
 });
-
 const esriWorldPhysical = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Physical_Map/MapServer/tile/{z}/{y}/{x}', {
   attribution: 'Tiles © Esri — Source: Esri, USGS, NOAA'
 });
 
-// Añadir capa estándar por defecto
-standard.addTo(map);
+// Capas para temas
+const osmStandard = standard;
+const stadiaDark = L.tileLayer('https://tiles.stadiamaps.com/tiles/alidade_smooth_dark/{z}/{x}/{y}{r}.png', {
+  attribution: '© Stadia Maps, © OpenMapTiles, © OpenStreetMap contributors'
+});
+const esriGray = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Light_Gray_Base/MapServer/tile/{z}/{y}/{x}', {
+  attribution: 'Tiles © Esri, HERE, Garmin, © OpenStreetMap contributors'
+});
 
-// Crear objeto con todas las capas base
+// Añadir capa estándar por defecto
+osmStandard.addTo(map);
+
+// Control de capas
 const baseMaps = {
   "Estándar": standard,
   "CycleOSM": cycle,
@@ -111,15 +111,10 @@ const baseMaps = {
   "Esri World Imagery": esriWorldImagery,
   "Esri World Physical": esriWorldPhysical
 };
-
-// Añadir control de capas al mapa
-// Control de capas
 const capasControl = L.control.layers(baseMaps).addTo(map);
 
-// Forzar que se abra/cierre solo al presionar (clic/tap)
+// Forzar que se abra/cierre solo al presionar
 const capasContainer = capasControl.getContainer();
-
-// Evitar que se abra por hover en desktop y asegurar tap en móviles
 ["click", "touchstart"].forEach(evt => {
   capasContainer.addEventListener(evt, function (e) {
     e.stopPropagation();
@@ -127,11 +122,7 @@ const capasContainer = capasControl.getContainer();
   });
 });
 
-
-
-// Desactivar zoom con doble clic
 map.doubleClickZoom.disable();
-
 
 // 🎨 Íconos personalizados
 const iconos = {
@@ -141,31 +132,28 @@ const iconos = {
   amarillo: L.icon({ iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-yellow.png', shadowUrl: 'https://unpkg.com/leaflet@1.9.3/dist/images/marker-shadow.png', iconSize: [25, 41], iconAnchor: [12, 41], popupAnchor: [1, -34], shadowSize: [41, 41] })
 };
 
-// 📌 Guardar marcador en Firestore y devolver datos con id
+// 📌 Guardar marcador
 async function guardarMarcador(lat, lng, nota, color, enlace) {
   const nuevo = { lat, lng, nota, color, enlace };
   const id = await guardarMarcadorFirestore(nuevo);
   return { id, ...nuevo };
 }
 
-// 🗑️ Eliminar marcador del mapa y Firestore
+// 🗑️ Eliminar marcador
 async function eliminarMarcador(marker) {
   map.removeLayer(marker);
   marcadores = marcadores.filter(m => m !== marker);
   await borrarMarcadorFirestore(marker.docId);
 }
 
-// 📍 Generar contenido del popup
+// 📍 Popup
 function generarPopup(datos) {
   let contenido = `<b>${datos.nota}</b><br><div class="boton-grupo">`;
-
   if (datos.enlace) {
-    contenido += `
-      <a href="${datos.enlace}" target="_blank">
+    contenido += `<a href="${datos.enlace}" target="_blank">
         <button class="btn-enlace"><i class="fas fa-link"></i> Enlace</button>
       </a>`;
   }
-
   if (usuarioAutenticado?.uid === "89DYIFl4vfZQzHLqDm0qw1TwK0y1") {
     contenido += `
       <button class="btn-editar" onclick="editarMarcador(${datos.lat}, ${datos.lng}, \`${datos.nota}\`, \`${datos.color}\`, \`${datos.enlace || ''}\`)">
@@ -173,9 +161,9 @@ function generarPopup(datos) {
       </button>
       <button class="btn-borrar" onclick="borrarMarcador(${datos.lat}, ${datos.lng}, \`${datos.nota}\`)">
         <i class="fas fa-trash"></i> Borrar
-      </button>
-    `;
+      </button>`;
   }
+  
 
   contenido += `</div>`;
   return contenido;
@@ -270,6 +258,7 @@ themeBtn.addEventListener("click", () => {
     themeBtn.innerText = "🌫️ Gris";
   }
 });
+
 
 
 
