@@ -15,7 +15,7 @@ html, body, #map {
 /* Botón flotante de información */
 #infoBtn {
   position: absolute;
-  top: 10px;
+  top: 60px;
   right: 10px;
   background: rgba(255,255,255,0.6); /* transparencia */
   border: none;
@@ -123,5 +123,6 @@ html, body, #map {
   margin-bottom: 4px;
   cursor: pointer;
 }
+
 
 
