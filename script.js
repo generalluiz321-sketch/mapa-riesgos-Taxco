@@ -75,15 +75,10 @@ const humanitarian = L.tileLayer('https://{s}.tile.openstreetmap.fr/hot/{z}/{x}/
 const openTopoMap = L.tileLayer('https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png', {
   attribution: 'Map data © OpenStreetMap, SRTM | Style © OpenTopoMap'
 });
-const stadiaSatellite = L.tileLayer('https://tiles.stadiamaps.com/tiles/alidade-satellite/{z}/{x}/{y}{r}.jpg', {
-  attribution: '© Stadia Maps, © OpenMapTiles, © OpenStreetMap contributors'
-});
 const esriWorldImagery = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
   attribution: 'Tiles © Esri — Source: Esri, Maxar, Earthstar Geographics'
 });
-const esriWorldPhysical = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Physical_Map/MapServer/tile/{z}/{y}/{x}', {
-  attribution: 'Tiles © Esri — Source: Esri, USGS, NOAA'
-});
+
 
 // Capas para temas
 const osmStandard = standard;
@@ -100,12 +95,10 @@ osmStandard.addTo(map);
 // Control de capas
 const baseMaps = {
   "Estándar": standard,
-  "CycleOSM": cycle,
+  "Relieve 1": cycle,
+  "Reliev 2": openTopoMap,
   "Humanitarian": humanitarian,
-  "OpenTopoMap": openTopoMap,
-  "Stadia Satellite": stadiaSatellite,
-  "Esri World Imagery": esriWorldImagery,
-  "Esri World Physical": esriWorldPhysical
+  "Esri World Imagery": esriWorldImagery
 
 };
 const capasControl = L.control.layers(baseMaps).addTo(map);
@@ -253,6 +246,7 @@ themeBtn.addEventListener("click", () => {
     themeBtn.innerText = "🌫️ Gris";
   }
 });
+
 
 
 
