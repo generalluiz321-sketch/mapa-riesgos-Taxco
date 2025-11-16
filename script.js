@@ -61,11 +61,70 @@ document.getElementById("logout-btn").addEventListener("click", async () => {
 });
 
 // 🌍 Inicializar mapa
+// 🌍 Inicializar mapa con varias capas base
 const map = L.map('map').setView([18.555, -99.605], 14);
-L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-  attribution: '&copy; OpenStreetMap contributors'
-}).addTo(map);
+
+// Definir capas base
+const standard = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+  attribution: '© OpenStreetMap contributors'
+});
+
+const cycle = L.tileLayer('https://{s}.tile-cyclosm.openstreetmap.fr/cyclosm/{z}/{x}/{y}.png', {
+  attribution: '© OpenStreetMap, CyclOSM'
+});
+
+const humanitarian = L.tileLayer('https://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png', {
+  attribution: '© OpenStreetMap, Humanitarian'
+});
+
+const transport = L.tileLayer('https://{s}.tile2.opencyclemap.org/transport/{z}/{x}/{y}.png', {
+  attribution: '© OpenStreetMap, Transport Map'
+});
+
+const openTopoMap = L.tileLayer('https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png', {
+  attribution: 'Map data © OpenStreetMap, SRTM | Style © OpenTopoMap'
+});
+
+const stadiaSatellite = L.tileLayer('https://tiles.stadiamaps.com/tiles/alidade-satellite/{z}/{x}/{y}{r}.jpg', {
+  attribution: '© Stadia Maps, © OpenMapTiles, © OpenStreetMap contributors'
+});
+
+const esriWorldImagery = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
+  attribution: 'Tiles © Esri — Source: Esri, Maxar, Earthstar Geographics'
+});
+
+const esriWorldPhysical = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Physical_Map/MapServer/tile/{z}/{y}/{x}', {
+  attribution: 'Tiles © Esri — Source: Esri, USGS, NOAA'
+});
+
+// Añadir capa estándar por defecto
+standard.addTo(map);
+
+// Crear objeto con todas las capas base
+const baseMaps = {
+  "Estándar": standard,
+  "CycleOSM": cycle,
+  "Humanitarian": humanitarian,
+  "Transporte": transport,
+  "OpenTopoMap": openTopoMap,
+  "Stadia Satellite": stadiaSatellite,
+  "Esri World Imagery": esriWorldImagery,
+  "Esri World Physical": esriWorldPhysical
+};
+
+// Añadir control de capas al mapa
+const capasControl = L.control.layers(baseMaps).addTo(map);
+
+// 🔧 Forzar que el menú de capas se abra/cierre solo al hacer clic
+const capasContainer = capasControl.getContainer();
+capasContainer.addEventListener("click", function (e) {
+  e.stopPropagation();
+  capasContainer.classList.toggle("leaflet-control-layers-expanded");
+});
+
+// Desactivar zoom con doble clic
 map.doubleClickZoom.disable();
+
 
 // 🎨 Íconos personalizados
 const iconos = {
@@ -178,6 +237,7 @@ map.on('dblclick', async function(e) {
   const datos = await guardarMarcador(e.latlng.lat, e.latlng.lng, nota, color, enlace);
   crearMarcador(datos);
 });
+
 
 
 
