@@ -119,11 +119,14 @@ const capasControl = L.control.layers(baseMaps).addTo(map);
 // Forzar que se abra/cierre solo al presionar (clic/tap)
 const capasContainer = capasControl.getContainer();
 
-// Evitar que se abra por hover en móviles
-capasContainer.addEventListener("click", function (e) {
-  e.stopPropagation();
-  capasContainer.classList.toggle("leaflet-control-layers-expanded");
+// Evitar que se abra por hover en desktop y asegurar tap en móviles
+["click", "touchstart"].forEach(evt => {
+  capasContainer.addEventListener(evt, function (e) {
+    e.stopPropagation();
+    capasContainer.classList.toggle("leaflet-control-layers-expanded");
+  });
 });
+
 
 
 // Desactivar zoom con doble clic
@@ -241,6 +244,7 @@ map.on('dblclick', async function(e) {
   const datos = await guardarMarcador(e.latlng.lat, e.latlng.lng, nota, color, enlace);
   crearMarcador(datos);
 });
+
 
 
 
