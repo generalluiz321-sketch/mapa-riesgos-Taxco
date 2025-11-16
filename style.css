@@ -3,19 +3,19 @@ body {
   font-family: Arial, sans-serif;
 }
 /* Tema claro (por defecto) */
-body.light-mode {
+body.light-mode .header{
   background-color: #ffffff;
   color: #000000;
 }
 
 /* Tema oscuro */
-body.dark-mode {
+body.dark-mode .header{
   background-color: #121212;
   color: #f1f1f1;
 }
 
 /* Tema gris/intermedio */
-body.gray-mode {
+body.gray-mode .header{
   background-color: #2f2f2f;
   color: #e0e0e0;
 }
@@ -183,6 +183,7 @@ button i {
 #theme-btn:hover {
   opacity: 0.9;
 }
+
 
 
 
