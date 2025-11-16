@@ -159,6 +159,32 @@ button i {
 .leaflet-control-layers:not(.leaflet-control-layers-expanded) {
   pointer-events: auto;
 }
+/* Contenedor del título y botón */
+.header {
+  display: flex;
+  justify-content: space-between; /* título a la izquierda, botón a la derecha */
+  align-items: center;
+  padding: 10px 20px;
+  background-color: #f5f5f5; /* puedes ajustar según el tema */
+  border-bottom: 1px solid #ccc;
+}
+
+/* Estilo del botón de tema */
+#theme-btn {
+  font-size: 12px;
+  padding: 6px 12px;
+  background-color: #4caf50; /* verde inicial */
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+#theme-btn:hover {
+  opacity: 0.9;
+}
+
+
 
 
 
