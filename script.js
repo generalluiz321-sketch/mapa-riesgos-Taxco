@@ -18,6 +18,22 @@ const transport = L.tileLayer('https://{s}.tile2.opencyclemap.org/transport/{z}/
   attribution: '&copy; OpenStreetMap, Transport Map'
 });
 
+const openTopoMap = L.tileLayer('https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png', {
+  attribution: 'Map data: © OpenStreetMap contributors, SRTM | Map style: © OpenTopoMap'
+});
+
+const stadiaSatellite = L.tileLayer('https://tiles.stadiamaps.com/tiles/alidade-satellite/{z}/{x}/{y}{r}.jpg', {
+  attribution: '© Stadia Maps, © OpenMapTiles, © OpenStreetMap contributors'
+});
+
+const esriWorldImagery = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
+  attribution: 'Tiles © Esri — Source: Esri, Maxar, Earthstar Geographics'
+});
+
+const esriWorldPhysical = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Physical_Map/MapServer/tile/{z}/{y}/{x}', {
+  attribution: 'Tiles © Esri — Source: Esri, USGS, NOAA'
+});
+
 // Añadir capa estándar por defecto
 standard.addTo(map);
 
@@ -99,6 +115,7 @@ toggleBtn.addEventListener("click", () => {
   }
   marcadoresVisibles = !marcadoresVisibles;
 });
+
 
 
 
