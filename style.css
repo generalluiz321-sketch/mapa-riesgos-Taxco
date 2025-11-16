@@ -16,7 +16,7 @@ html, body, #map {
 #infoBtn {
   position: absolute;
   top: 60px;
-  right: 10px;
+  left: 15px;
   background: rgba(255,255,255,0.6); /* transparencia */
   border: none;
   padding: 8px;
@@ -123,6 +123,7 @@ html, body, #map {
   margin-bottom: 4px;
   cursor: pointer;
 }
+
 
 
 
