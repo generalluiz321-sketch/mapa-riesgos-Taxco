@@ -87,6 +87,10 @@ const esriWorldImagery = L.tileLayer('https://server.arcgisonline.com/ArcGIS/res
 const esriWorldPhysical = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Physical_Map/MapServer/tile/{z}/{y}/{x}', {
   attribution: 'Tiles © Esri — Source: Esri, USGS, NOAA'
 });
+const esriGray = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Light_Gray_Base/MapServer/tile/{z}/{y}/{x}', {
+  attribution: 'Tiles © Esri, HERE, Garmin, © OpenStreetMap contributors'
+});
+
 
 // Capas para temas
 const osmStandard = standard;
@@ -109,7 +113,8 @@ const baseMaps = {
   "OpenTopoMap": openTopoMap,
   "Stadia Satellite": stadiaSatellite,
   "Esri World Imagery": esriWorldImagery,
-  "Esri World Physical": esriWorldPhysical
+  "Esri World Physical": esriWorldPhysical,
+  "Gris": esriGray
 };
 const capasControl = L.control.layers(baseMaps).addTo(map);
 
@@ -258,6 +263,7 @@ themeBtn.addEventListener("click", () => {
     themeBtn.innerText = "🌫️ Gris";
   }
 });
+
 
 
 
