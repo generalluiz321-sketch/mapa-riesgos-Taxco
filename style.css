@@ -2,6 +2,23 @@ body {
   margin: 0;
   font-family: Arial, sans-serif;
 }
+
+/* Fondo global por tema */
+body.light-mode {
+  background-color: #ffffff; /* blanco */
+  color: #000000;
+}
+
+body.dark-mode {
+  background-color: #121212; /* negro/gris muy oscuro */
+  color: #f1f1f1;
+}
+
+body.gray-mode {
+  background-color: #2f2f2f; /* gris medio */
+  color: #e0e0e0;
+}
+
 /* Estilo base */
 .header {
   display: flex;
@@ -50,7 +67,6 @@ body.gray-mode #leyenda {
   border-left-color: #aaa;
 }
 
-
 /* Ajuste para el mapa */
 #map {
   height: 600px;
@@ -62,6 +78,7 @@ h1 {
   text-align: center;
   margin: 10px;
 }
+
 button {
   font-size: 10px;
   padding: 6px 10px;
@@ -71,6 +88,8 @@ button {
   border-radius: 2px;
   cursor: pointer;
 }
+
+/* Botón login */
 #login-btn {
   position: fixed;
   bottom: 10px;
@@ -87,27 +106,26 @@ button {
 #login-btn:hover {
   opacity: 1;
 }
-/* 🔓 Botón logout (rojo) */
+
+/* Botón logout */
 #logout-btn {
   position: fixed;
   bottom: 10px;
-  right: 60px; /* se coloca a la izquierda del login */
+  right: 60px;
   padding: 4px 6px;
   font-size: 10px;
-  background-color: #f44336; /* rojo intenso */
+  background-color: #f44336;
   color: white;
   border: 1px solid #ccc;
   border-radius: 4px;
   cursor: pointer;
   opacity: 0.8;
   z-index: 999;
-  display: none; /* oculto por defecto */
+  display: none;
 }
-
 #logout-btn:hover {
   opacity: 1;
 }
-
 
 button i {
   margin-right: 6px;
@@ -133,30 +151,26 @@ button i {
 }
 
 .btn-enlace {
-  background-color: #2ecc71; /* Verde */
+  background-color: #2ecc71;
 }
-
 .btn-editar {
-  background-color: #7f8c8d; /* Gris */
+  background-color: #7f8c8d;
 }
-
 .btn-borrar {
-  background-color: #e74c3c; /* Rojo */
-
+  background-color: #e74c3c;
 }
+
 /* 🎨 Botón de capas Leaflet */
 .leaflet-control-layers {
-  background-color: #fff;       /* Fondo blanco */
-  border: 1px solid #ccc;       /* Borde gris */
-  border-radius: 6px;           /* Bordes redondeados */
-  box-shadow: 0 2px 6px rgba(0,0,0,0.2); /* Sombra ligera */
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.2);
   cursor: pointer;
   transition: all 0.2s ease-in-out;
 }
-
-/* Icono del botón cerrado */
 .leaflet-control-layers-toggle {
-  background-image: url("https://cdn-icons-png.flaticon.com/512/854/854878.png"); /* 🗺️ icono mapa */
+  background-image: url("https://cdn-icons-png.flaticon.com/512/854/854878.png");
   background-size: 20px 20px;
   background-repeat: no-repeat;
   background-position: center;
@@ -164,64 +178,37 @@ button i {
   height: 30px;
   border-radius: 50%;
 }
-
-/* Hover para dar feedback */
 .leaflet-control-layers:hover {
   background-color: #f9f9f9;
   border-color: #999;
 }
-
-/* Caja desplegada */
 .leaflet-control-layers-expanded {
   padding: 8px;
   font-size: 12px;
 }
-
 .leaflet-control-layers-expanded label {
   display: block;
   margin-bottom: 4px;
   cursor: pointer;
 }
-/* Evitar que se abra automáticamente en móviles */
 .leaflet-control-layers {
   cursor: pointer;
 }
-
 .leaflet-control-layers:not(.leaflet-control-layers-expanded) {
   pointer-events: auto;
 }
-/* Contenedor del título y botón */
-.header {
-  display: flex;
-  justify-content: space-between; /* título a la izquierda, botón a la derecha */
-  align-items: center;
-  padding: 10px 20px;
-  background-color: #f5f5f5; /* puedes ajustar según el tema */
-  border-bottom: 1px solid #ccc;
-}
 
-/* Estilo del botón de tema */
+/* Botón de tema */
 #theme-btn {
   font-size: 12px;
   padding: 6px 12px;
-  background-color: #4caf50; /* verde inicial */
+  background-color: #4caf50;
   color: white;
   border: none;
   border-radius: 4px;
   cursor: pointer;
 }
-
 #theme-btn:hover {
   opacity: 0.9;
 }
-
-
-
-
-
-
-
-
-
-
 
