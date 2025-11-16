@@ -110,6 +110,19 @@ const baseMaps = {
 
 const capasControl = L.control.layers(baseMaps).addTo(map);
 
+// Lógica para abrir/cerrar ventana de información
+const infoBtn = document.getElementById('infoBtn');
+const infoWindow = document.getElementById('infoWindow');
+const closeInfo = document.getElementById('closeInfo');
+
+infoBtn.addEventListener('click', () => {
+  infoWindow.style.display = 'block';
+});
+
+closeInfo.addEventListener('click', () => {
+  infoWindow.style.display = 'none';
+});
+
 
 // Forzar que se abra/cierre solo al presionar
 const capasContainer = capasControl.getContainer();
@@ -254,6 +267,7 @@ themeBtn.addEventListener("click", () => {
     themeBtn.innerText = "🌫️ Gris";
   }
 });
+
 
 
 
