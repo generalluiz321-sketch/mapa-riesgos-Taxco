@@ -15,18 +15,20 @@ let marcadores = [];
 onAuthStateChanged(auth, user => {
   const loginBtn = document.getElementById("login-btn");
   const logoutBtn = document.getElementById("logout-btn");
-
-  if (user?.uid === "89DYIFl4vfZQzHLqDm0qw1TwK0y1") {
-    usuarioAutenticado = user;
-    loginBtn.style.backgroundColor = "#4caf50";
-    loginBtn.innerText = "✔ Admin4";
-    logoutBtn.style.display = "block";
-  } else {
-    usuarioAutenticado = null;
-    loginBtn.style.backgroundColor = "#eee";
-    loginBtn.innerText = "🔒";
-    logoutBtn.style.display = "none";
-  }
+  
+if (user?.uid === "89DYIFl4vfZQzHLqDm0qw1TwK0y1") {
+  usuarioAutenticado = user;
+  loginBtn.classList.remove("locked");
+  loginBtn.classList.add("admin");
+  loginBtn.innerText = "✔ Admin4";
+  logoutBtn.style.display = "block";
+} else {
+  usuarioAutenticado = null;
+  loginBtn.classList.remove("admin");
+  loginBtn.classList.add("locked");
+  loginBtn.innerText = "🔒";
+  logoutBtn.style.display = "none";
+}
 
   marcadores.forEach(marker => {
     const datos = marker.datos;
@@ -283,6 +285,7 @@ themeBtn.addEventListener("click", () => {
     themeBtn.innerText = "🌞"; // icono sol
   }
 });
+
 
 
 
