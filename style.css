@@ -20,9 +20,9 @@ html, body, #map {
 
 .leaflet-control-zoom-in,
 .leaflet-control-zoom-out {
-  width: 30px !important;   /* ancho igual a tus botones */
-  height: 30px !important;  /* alto igual */
-  font-size: 20px !important; /* tamaño del símbolo + y - */
+ /* width: 30px !important;   /* ancho igual a tus botones */
+ /* height: 30px !important;  /* alto igual */
+  font-size: 18px !important; /* tamaño del símbolo + y - */
   padding: 8px !important;    /* espacio interno */
   background: rgba(255,255,255,0.55) !important; /* translúcido */
   backdrop-filter: blur(6px);
@@ -260,6 +260,7 @@ body.dark-mode .leaflet-popup-tip {
   background: rgba(40,40,40,0.7); /* triangulito también oscuro translúcido */
   backdrop-filter: blur(6px);
 }
+
 
 
 
