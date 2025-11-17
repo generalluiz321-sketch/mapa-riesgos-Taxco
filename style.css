@@ -73,7 +73,7 @@ button:hover {
 
 #infoWindow {
   top: 10px;
-  left: 50px;
+  left: 60px;
   width: 320px;
 }
 
@@ -92,7 +92,8 @@ button:hover {
   width: 100%;
   padding: 6px;
   border-radius: 4px;
-  background: #eee;
+  /*background: #eee;*/
+  background: rgba(255,255,255,0.45);
   cursor: pointer;
 }
 .style-option:hover {
@@ -152,6 +153,7 @@ button:hover {
   background: rgba(255, 255, 255, 0.45); /* triangulito también translúcido */
   backdrop-filter: blur(6px);
 }
+
 
 
 
