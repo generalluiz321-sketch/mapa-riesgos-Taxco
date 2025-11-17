@@ -328,7 +328,7 @@ body.dark-mode .leaflet-popup-tip {
   }
 
   .window {
-    width: 70%;        /* en lugar de 90% */
+    width: 60%;        /* en lugar de 90% */
     padding: 16px;     /* en lugar de 20px */
     font-size: 1.1rem; /* en lugar de 1.2rem */
   }
@@ -337,6 +337,7 @@ body.dark-mode .leaflet-popup-tip {
     font-size: 1.2rem; /* en lugar de 1.5rem */
   }
 }
+
 
 
 
