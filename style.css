@@ -300,12 +300,25 @@ body.dark-mode .leaflet-popup-tip {
 }
 
 /* Ajustes para pantallas móviles */
-@media (max-width: 768px) {
+/*@media (max-width: 768px) {
   .map-control {
     width: 52px;     /* más grande para dedo */
-    height: 52px;
+   /* height: 52px;
     font-size: 1.5rem; /* icono/texto más grande */
+   /* border-radius: 14px;
+  }
+}
+*/
+@media (max-width: 768px) {
+  .map-control {
+    width: 52px;
+    height: 52px;
     border-radius: 14px;
+  }
+
+  .map-control svg {
+    width: 28px;   /* agranda el SVG */
+    height: 28px;
   }
 }
 
@@ -315,6 +328,7 @@ body.dark-mode .leaflet-popup-tip {
   flex-direction: column;
   gap: 12px; /* espacio mínimo para evitar toques accidentales */
 }
+
 
 
 
