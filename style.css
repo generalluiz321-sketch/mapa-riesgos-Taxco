@@ -300,43 +300,60 @@ body.dark-mode .leaflet-popup-tip {
 }
 
 /* Ajustes para pantallas móviles */
-/*@media (max-width: 768px) {
-  .map-control {
-    width: 52px;     /* más grande para dedo */
-   /* height: 52px;
-    font-size: 1.5rem; /* icono/texto más grande */
-   /* border-radius: 14px;
-  }
-}
-*/
-@media (max-width: 1088px) {
-  .map-control {
-    width: 52px;
-    height: 52px;
-    border-radius: 14px;
-  }
-
-  .map-control svg {
-    width: 28px;   /* agranda el SVG */
-    height: 28px;
-  }
-}
-
-/* Espaciado entre botones */
-.map-controls-container {
+/* Estilos generales */
+.map-control {
   display: flex;
-  flex-direction: column;
-  gap: 12px; /* espacio mínimo para evitar toques accidentales */
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  font-size: 1rem; /* tamaño base del ícono/texto */
 }
 
+.leaflet-popup-content {
+  font-size: 1rem; /* tamaño base del texto en popups */
+}
 
+.window {
+  width: 300px;
+  height: auto;
+  padding: 16px;
+  font-size: 1rem;
+}
 
+/* Ajustes para pantallas móviles */
+@media (max-width: 768px) {
+  /* Botones más grandes */
+  .map-control {
+    width: 60px;
+    height: 60px;
+    border-radius: 14px;
+    font-size: 1.5rem; /* ícono/texto más grande */
+  }
 
+  /* Espaciado entre botones */
+  .map-controls-container {
+    gap: 16px; /* más espacio para evitar toques accidentales */
+  }
 
+  /* Popups más legibles */
+  .leaflet-popup-content {
+    font-size: 1.3rem; /* texto más grande */
+    line-height: 1.6;  /* más aire entre líneas */
+  }
 
+  /* Ventanas/overlays más grandes */
+  .window {
+    width: 90%;        /* ocupa casi todo el ancho en móvil */
+    padding: 20px;     /* más espacio interno */
+    font-size: 1.2rem; /* texto más grande */
+  }
 
-
-
-
+  /* Si usas títulos dentro de ventanas */
+  .window h1, .window h2, .window h3 {
+    font-size: 1.5rem;
+  }
+}
 
 
