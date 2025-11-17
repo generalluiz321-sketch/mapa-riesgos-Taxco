@@ -156,6 +156,7 @@ button:hover {
 
 /* Estado admin (verde translúcido) */
 #login-btn.admin {
+  font-size: 12px; 
   background: rgba(76,175,80,0.4);
   color: white;
 }
@@ -193,6 +194,7 @@ button:hover {
   background: rgba(255,255,255,0.45);
   backdrop-filter: blur(6px);
 }
+
 
 
 
