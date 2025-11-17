@@ -43,7 +43,7 @@ button {
   border: none;
   border-radius: 6px;
   cursor: pointer;
-  font-size: 20px;
+  font-size: 22px;
   padding: 10px;
   backdrop-filter: blur(6px);
   transition: background 0.4s ease, transform 0.2s ease;
@@ -262,6 +262,7 @@ body.dark-mode .leaflet-popup-tip {
   background: rgba(40,40,40,0.7); /* triangulito también oscuro translúcido */
   backdrop-filter: blur(6px);
 }
+
 
 
 
