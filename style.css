@@ -11,6 +11,29 @@ html, body, #map {
   margin: 0;
   padding: 0;
 }
+/* Contenedor del control de zoom */
+.leaflet-control-zoom {
+  background: none; /* elimina fondo sólido */
+  box-shadow: none;
+}
+
+/* Botones individuales (+ y -) */
+.leaflet-control-zoom-in,
+.leaflet-control-zoom-out {
+  background: rgba(255,255,255,0.4); /* blanco translúcido */
+  backdrop-filter: blur(6px);        /* efecto vidrio */
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  color: #000;                       /* color del símbolo */
+  transition: background 0.3s ease;
+}
+
+/* Hover para dar feedback */
+.leaflet-control-zoom-in:hover,
+.leaflet-control-zoom-out:hover {
+  background: rgba(255,255,255,0.6);
+}
+
 
 /* 🎛️ Estilo general para botones flotantes */
 button {
@@ -177,6 +200,7 @@ button:hover {
   background: rgba(255, 255, 255, 0.45); /* triangulito también translúcido */
   backdrop-filter: blur(6px);
 }
+
 
 
 
