@@ -122,8 +122,8 @@ button:hover {
 
 #login-btn {
   right: 10px;
-  background: rgba(255,255,255,0.3);
-  border: 1px solid #ccc;
+  background: rgba(255,255,255,0.1);
+  /*border: 1px solid #ccc;*/
 }
 
 #logout-btn {
@@ -153,6 +153,7 @@ button:hover {
   background: rgba(255, 255, 255, 0.45); /* triangulito también translúcido */
   backdrop-filter: blur(6px);
 }
+
 
 
 
