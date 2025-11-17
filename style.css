@@ -194,15 +194,52 @@ button:hover {
   background: rgba(255,255,255,0.45);
   backdrop-filter: blur(6px);
 }
+/* 🌙 Modo oscuro */
+body.dark-mode {
+  background: #222; /* fondo general oscuro */
+  color: #fff;      /* texto claro */
+}
 
+/* Botones flotantes en modo oscuro */
+body.dark-mode button,
+body.dark-mode #infoBtn,
+body.dark-mode #styleBtn,
+body.dark-mode #themeBtn {
+  background: rgba(80,80,80,0.4);
+  color: #fff;
+  border: 1px solid #555;
+}
 
+/* Ventanas flotantes en modo oscuro */
+body.dark-mode #infoWindow,
+body.dark-mode #styleWindow {
+  background: rgba(40,40,40,0.6);
+  color: #fff;
+  border: 1px solid #555;
+}
 
+/* Botones login/logout en modo oscuro */
+body.dark-mode #login-btn.locked {
+  background: rgba(100,100,100,0.4);
+  color: #fff;
+}
 
+body.dark-mode #login-btn.admin {
+  background: rgba(76,175,80,0.6);
+  color: #fff;
+}
 
+body.dark-mode #logout-btn {
+  background: rgba(244,67,54,0.6);
+  color: #fff;
+}
 
-
-
-
-
+/* Zoom en modo oscuro */
+body.dark-mode .leaflet-control-zoom-in,
+body.dark-mode .leaflet-control-zoom-out {
+  background: rgba(80,80,80,0.4) !important;
+  color: #fff !important;
+  border: 1px solid #555 !important;
+}
 
 
