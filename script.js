@@ -263,6 +263,28 @@ map.on('dblclick', async function(e) {
   crearMarcador(datos);
 });
 
+// Botón de tema
+const themeBtn = document.getElementById("themeBtn");
+
+// Inicializar en modo claro
+document.body.classList.add("light-mode");
+themeBtn.innerText = "🌞"; // icono sol
+
+themeBtn.addEventListener("click", () => {
+  if (document.body.classList.contains("light-mode")) {
+    // Cambiar a oscuro
+    document.body.classList.remove("light-mode");
+    document.body.classList.add("dark-mode");
+    themeBtn.innerText = "🌙"; // icono luna
+  } else {
+    // Cambiar a claro
+    document.body.classList.remove("dark-mode");
+    document.body.classList.add("light-mode");
+    themeBtn.innerText = "🌞"; // icono sol
+  }
+});
+
+
 
 
 
