@@ -85,16 +85,6 @@ const cartoDarkMatter = L.tileLayer.provider('CartoDB.DarkMatter');
 // Añadir capa estándar por defecto
 standard.addTo(map);
 
-// Control de capas (solo las que quieres mantener)
-const baseMaps = {
-  "Estándar": standard,
-  "Satelite": esriWorldImagery,
-  "Relieve 1": cycle,
-  "Relieve 2": openTopoMap,
-  "Humanitarian": humanitarian,
-  "Dark": cartoDarkMatter
-};
-
 const capasControl = L.control.layers(baseMaps).addTo(map);
 
 const styleBtn = document.getElementById('styleBtn');
@@ -302,6 +292,7 @@ themeBtn.addEventListener("click", () => {
     themeBtn.innerText = "🌫️ Gris";
   }
 });
+
 
 
 
