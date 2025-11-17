@@ -145,7 +145,7 @@ button:hover {
 /* 🔐 Botón base login */
 #login-btn {
   position: fixed;
-  bottom: 10px;
+  bottom: 6px;
   right: 10px;
   border-radius: 4px;
   font-size: 10px;
@@ -208,6 +208,7 @@ button:hover {
   background: rgba(255, 255, 255, 0.45); /* triangulito también translúcido */
   backdrop-filter: blur(6px);
 }
+
 
 
 
