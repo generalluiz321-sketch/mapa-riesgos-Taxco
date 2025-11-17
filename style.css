@@ -316,9 +316,9 @@ body.dark-mode .leaflet-popup-tip {
 /* 📱 Ajustes para pantallas móviles */
 @media (max-width: 768px) {
   .map-control {
-    width: 45px;      /* más grande para dedo */
-    height: 45px;
-    font-size: 1.2rem; /* ícono más grande */
+    width: 40px;      /* más grande para dedo */
+    height: 40px;
+    font-size: 1.0rem; /* ícono más grande */
     border-radius: 10px;
   }
 
@@ -328,8 +328,8 @@ body.dark-mode .leaflet-popup-tip {
   }
 
   .window {
-    width: 70%;        /* ocupa casi todo el ancho en móvil */
-    padding: 20px;
+    width: 50%;        /* ocupa casi todo el ancho en móvil */
+    padding: 10px;
     font-size: 1.0rem;
   }
 
@@ -337,6 +337,7 @@ body.dark-mode .leaflet-popup-tip {
     font-size: 1.2rem;
   }
 }
+
 
 
 
