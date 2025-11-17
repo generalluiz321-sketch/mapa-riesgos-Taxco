@@ -277,50 +277,6 @@ map.on('dblclick', async function(e) {
   crearMarcador(datos);
 });
 
-// 🎨 Cambiar tema (claro, oscuro, gris)
-const themeBtn = document.getElementById("theme-btn");
-const themes = ["light-mode", "dark-mode", "gray-mode"];
-let currentThemeIndex = 0;
-
-// Inicializar en modo claro
-document.body.classList.add(themes[currentThemeIndex]);
-
-themeBtn.addEventListener("click", () => {
-  // Quitar tema actual
-  document.body.classList.remove(themes[currentThemeIndex]);
-
-  // Cambiar al siguiente
-  currentThemeIndex = (currentThemeIndex + 1) % themes.length;
-  document.body.classList.add(themes[currentThemeIndex]);
-
-  // Cambiar texto del botón según el tema
-  if (themes[currentThemeIndex] === "light-mode") {
-    themeBtn.innerText = "🌞 Claro";
-  } else if (themes[currentThemeIndex] === "dark-mode") {
-    themeBtn.innerText = "🌙 Oscuro";
-  } else {
-    themeBtn.innerText = "🌫️ Gris";
-  }
-});
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
