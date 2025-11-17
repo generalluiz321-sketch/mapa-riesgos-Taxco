@@ -120,11 +120,6 @@ button:hover {
   z-index: 999;
 }
 
-/*#login-btn {
-  right: 10px;
-  background: rgba(255,255,255,0.1);
-  border: 1px solid #ccc;
-}*/
 /* Estado normal (candado) */
 #login-btn.locked {
   left: 10px;
@@ -144,7 +139,7 @@ button:hover {
   right: 60px;
   background: rgba(244,67,54,0.4);
   color: white;
-  border: 1px solid #ccc;
+ /* border: 1px solid #ccc;*/
   display: none;
 }
 
@@ -167,6 +162,7 @@ button:hover {
   background: rgba(255, 255, 255, 0.45); /* triangulito también translúcido */
   backdrop-filter: blur(6px);
 }
+
 
 
 
