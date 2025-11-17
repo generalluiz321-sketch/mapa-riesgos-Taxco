@@ -146,13 +146,13 @@ closeInfo.addEventListener('click', () => {
 
 
 // Forzar que se abra/cierre solo al presionar
-const capasContainer = capasControl.getContainer();
-["click", "touchstart"].forEach(evt => {
-  capasContainer.addEventListener(evt, function (e) {
-    e.stopPropagation();
-    capasContainer.classList.toggle("leaflet-control-layers-expanded");
-  });
-});
+//const capasContainer = capasControl.getContainer();
+//["click", "touchstart"].forEach(evt => {
+//  capasContainer.addEventListener(evt, function (e) {
+//    e.stopPropagation();
+//    capasContainer.classList.toggle("leaflet-control-layers-expanded");
+//  });
+//});
 
 map.doubleClickZoom.disable();
 
@@ -262,6 +262,7 @@ map.on('dblclick', async function(e) {
   const datos = await guardarMarcador(e.latlng.lat, e.latlng.lng, nota, color, enlace);
   crearMarcador(datos);
 });
+
 
 
 
