@@ -321,39 +321,64 @@ body.dark-mode .leaflet-popup-tip {
   padding: 16px;
   font-size: 1rem;
 }
+/* Estilo base para botones flotantes */
+.map-control {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;      /* tamaño base en desktop */
+  height: 40px;
+  font-size: 1.2rem;
+  border-radius: 12px;
+  backdrop-filter: blur(8px);
+  background: rgba(255, 255, 255, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
 
-/* Ajustes para pantallas móviles */
+.map-control:hover {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+/* Popups base */
+.leaflet-popup-content {
+  font-size: 1rem;
+}
+
+/* Ventanas base */
+.window {
+  width: 300px;
+  height: auto;
+  padding: 16px;
+  font-size: 1rem;
+}
+
+/* 📱 Ajustes para pantallas móviles */
 @media (max-width: 768px) {
-  /* Botones más grandes */
   .map-control {
-    width: 60px;
+    width: 60px;      /* más grande para dedo */
     height: 60px;
+    font-size: 1.6rem; /* ícono más grande */
     border-radius: 14px;
-    font-size: 1.5rem; /* ícono/texto más grande */
   }
 
-  /* Espaciado entre botones */
-  .map-controls-container {
-    gap: 16px; /* más espacio para evitar toques accidentales */
-  }
-
-  /* Popups más legibles */
   .leaflet-popup-content {
-    font-size: 1.3rem; /* texto más grande */
-    line-height: 1.6;  /* más aire entre líneas */
+    font-size: 1.3rem; /* texto más grande en popups */
+    line-height: 1.6;
   }
 
-  /* Ventanas/overlays más grandes */
   .window {
     width: 90%;        /* ocupa casi todo el ancho en móvil */
-    padding: 20px;     /* más espacio interno */
-    font-size: 1.2rem; /* texto más grande */
+    padding: 20px;
+    font-size: 1.2rem;
   }
 
-  /* Si usas títulos dentro de ventanas */
-  .window h1, .window h2, .window h3 {
+  .window h2, .window h3 {
     font-size: 1.5rem;
   }
 }
+
 
 
