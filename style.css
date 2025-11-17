@@ -114,7 +114,7 @@ button:hover {
   width: 100%;
   padding: 6px;
   border-radius: 4px;
-  background: rgba(255,255,255,0.45);
+  background: rgba(255,255,255,0.35);
   cursor: pointer;
 }
 .style-option:hover {
@@ -137,7 +137,7 @@ button:hover {
   bottom: 10px;
   right: 10px;
   border-radius: 4px;
-  font-size: 12px;       /* candado más pequeño */
+  font-size: 8px;       /* candado más pequeño */
   padding: 4px 6px;
   z-index: 999;
   border: 1px solid #ccc;
@@ -188,5 +188,6 @@ button:hover {
   background: rgba(255,255,255,0.45);
   backdrop-filter: blur(6px);
 }
+
 
 
