@@ -42,7 +42,8 @@ document.getElementById("login-btn").addEventListener("click", async () => {
   if (user?.uid === "89DYIFl4vfZQzHLqDm0qw1TwK0y1") {
     usuarioAutenticado = user;
     const btn = document.getElementById("login-btn");
-    btn.style.backgroundColor = "#4caf50";
+    btn.classList.remove("locked");
+    btn.classList.add("admin");
     btn.innerText = "✔ Admin";
     alert("Modo edición activado");
     document.getElementById("logout-btn").style.display = "block";
@@ -285,6 +286,7 @@ themeBtn.addEventListener("click", () => {
     themeBtn.innerText = "🌞"; // icono sol
   }
 });
+
 
 
 
