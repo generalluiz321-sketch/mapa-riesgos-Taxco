@@ -75,38 +75,24 @@ const humanitarian = L.tileLayer('https://{s}.tile.openstreetmap.fr/hot/{z}/{x}/
 const openTopoMap = L.tileLayer('https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png', {
   attribution: 'Map data © OpenStreetMap, SRTM | Style © OpenTopoMap'
 });
-const esriWorldImagery = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
-  attribution: 'Tiles © Esri — Source: Esri, Maxar, Earthstar Geographics'
-});
+const esriWorldImagery = L.tileLayer(
+  'https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}',
+  { attribution: 'Tiles © Esri — Source: Esri, Maxar, Earthstar Geographics' }
+);
 
-// Capas adicionales con leaflet-providers
+// Capa adicional (oscura)
 const cartoDarkMatter = L.tileLayer.provider('CartoDB.DarkMatter');
 
 // Añadir capa estándar por defecto
 standard.addTo(map);
 
-// Control de capas (solo las que quieres mantener) 
-const baseMaps = { 
-"Estándar": standard, 
-"Satelite": esriWorldImagery, 
-"Relieve 1": cycle, 
-"Relieve 2": openTopoMap, 
-"Humanitarian": humanitarian, 
-"Dark": cartoDarkMatter 
-};
-
-const capasControl = L.control.layers(baseMaps).addTo(map);
-
+// Botón y ventana de estilos (toggle)
 const styleBtn = document.getElementById('styleBtn');
 const styleWindow = document.getElementById('styleWindow');
 const closeStyle = document.getElementById('closeStyle');
 
 styleBtn.addEventListener('click', () => {
-  if (styleWindow.style.display === 'block') {
-    styleWindow.style.display = 'none';
-  } else {
-    styleWindow.style.display = 'block';
-  }
+  styleWindow.style.display = (styleWindow.style.display === 'block') ? 'none' : 'block';
 });
 
 closeStyle.addEventListener('click', () => {
@@ -276,6 +262,7 @@ map.on('dblclick', async function(e) {
   const datos = await guardarMarcador(e.latlng.lat, e.latlng.lng, nota, color, enlace);
   crearMarcador(datos);
 });
+
 
 
 
