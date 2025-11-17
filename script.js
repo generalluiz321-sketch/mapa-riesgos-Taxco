@@ -95,7 +95,7 @@ const baseMaps = {
   "Dark": cartoDarkMatter
 };
 
-//const capasControl = L.control.layers(baseMaps).addTo(map);
+const capasControl = L.control.layers(baseMaps).addTo(map);
 
 const styleBtn = document.getElementById('styleBtn');
 const styleWindow = document.getElementById('styleWindow');
@@ -302,6 +302,7 @@ themeBtn.addEventListener("click", () => {
     themeBtn.innerText = "🌫️ Gris";
   }
 });
+
 
 
 
