@@ -97,6 +97,47 @@ const baseMaps = {
 
 const capasControl = L.control.layers(baseMaps).addTo(map);
 
+const styleBtn = document.getElementById('styleBtn');
+const styleWindow = document.getElementById('styleWindow');
+const closeStyle = document.getElementById('closeStyle');
+
+styleBtn.addEventListener('click', () => {
+  if (styleWindow.style.display === 'block') {
+    styleWindow.style.display = 'none';
+  } else {
+    styleWindow.style.display = 'block';
+  }
+});
+
+closeStyle.addEventListener('click', () => {
+  styleWindow.style.display = 'none';
+});
+
+document.querySelectorAll('.style-option').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const style = btn.dataset.style;
+
+    // Quitar capas actuales
+    map.eachLayer(layer => {
+      if (layer instanceof L.TileLayer) {
+        map.removeLayer(layer);
+      }
+    });
+
+    // Agregar según opción
+    if (style === 'standard') standard.addTo(map);
+    if (style === 'satellite') esriWorldImagery.addTo(map);
+    if (style === 'cycle') cycle.addTo(map);
+    if (style === 'topo') openTopoMap.addTo(map);
+    if (style === 'humanitarian') humanitarian.addTo(map);
+    if (style === 'carto') cartoDarkMatter.addTo(map);
+
+    // Cerrar ventana después de elegir
+    styleWindow.style.display = 'none';
+  });
+});
+
+
 // Lógica para abrir/cerrar ventana de información
 const infoBtn = document.getElementById('infoBtn');
 const infoWindow = document.getElementById('infoWindow');
@@ -254,6 +295,7 @@ themeBtn.addEventListener("click", () => {
     themeBtn.innerText = "🌫️ Gris";
   }
 });
+
 
 
 
