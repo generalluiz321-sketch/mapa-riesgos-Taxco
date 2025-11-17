@@ -278,18 +278,43 @@ body.dark-mode .leaflet-popup-tip {
   background: rgba(40,40,40,0.7); /* triangulito también oscuro translúcido */
   backdrop-filter: blur(6px);
 }
+/* Estilo base para botones flotantes */
+.map-control {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;      /* tamaño base en desktop */
+  height: 40px;
+  font-size: 1.2rem;
+  border-radius: 12px;
+  backdrop-filter: blur(8px); /* glass-effect */
+  background: rgba(255, 255, 255, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
 
+.map-control:hover {
+  background: rgba(255, 255, 255, 0.3);
+}
 
+/* Ajustes para pantallas móviles */
+@media (max-width: 768px) {
+  .map-control {
+    width: 52px;     /* más grande para dedo */
+    height: 52px;
+    font-size: 1.5rem; /* icono/texto más grande */
+    border-radius: 14px;
+  }
+}
 
-
-
-
-
-
-
-
-
-
+/* Espaciado entre botones */
+.map-controls-container {
+  display: flex;
+  flex-direction: column;
+  gap: 12px; /* espacio mínimo para evitar toques accidentales */
+}
 
 
 
