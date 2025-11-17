@@ -300,7 +300,7 @@ body.dark-mode .leaflet-popup-tip {
 }
 
 /* Ajustes para pantallas móviles */
-@media (max-width: 768px) {
+@media (max-width: 1088px) {
   .map-control {
     width: 52px;     /* más grande para dedo */
     height: 52px;
@@ -315,6 +315,7 @@ body.dark-mode .leaflet-popup-tip {
   flex-direction: column;
   gap: 12px; /* espacio mínimo para evitar toques accidentales */
 }
+
 
 
 
