@@ -92,7 +92,8 @@ const baseMaps = {
 "Relieve 1": cycle, 
 "Relieve 2": openTopoMap, 
 "Humanitarian": humanitarian, 
-"Dark": cartoDarkMatter };
+"Dark": cartoDarkMatter 
+};
 
 const capasControl = L.control.layers(baseMaps).addTo(map);
 
@@ -301,6 +302,7 @@ themeBtn.addEventListener("click", () => {
     themeBtn.innerText = "🌫️ Gris";
   }
 });
+
 
 
 
