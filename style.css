@@ -17,7 +17,7 @@ button {
   border: none;
   border-radius: 6px;
   cursor: pointer;
-  font-size: 16px;
+  font-size: 18px;
   padding: 8px;
   transition: background 0.4s ease, transform 0.2s ease;
 }
@@ -110,7 +110,7 @@ button:hover {
   position: fixed;
   bottom: 10px;
   border-radius: 4px;
-  font-size: 10px;
+  font-size: 6px;
   padding: 4px 8px;
   z-index: 999;
 }
@@ -148,6 +148,7 @@ button:hover {
   background: rgba(255, 255, 255, 0.45); /* triangulito también translúcido */
   backdrop-filter: blur(6px);
 }
+
 
 
 
