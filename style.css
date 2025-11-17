@@ -120,11 +120,23 @@ button:hover {
   z-index: 999;
 }
 
-#login-btn {
+/*#login-btn {
   right: 10px;
   background: rgba(255,255,255,0.1);
-  /*border: 1px solid #ccc;*/
+  border: 1px solid #ccc;
+}*/
+/* Estado normal (candado) */
+#login-btn.locked {
+  background: rgba(255,255,255,0.3);
+  color: rgba(0,0,0,0.7); /* candado translúcido si es ícono */
 }
+
+/* Estado admin */
+#login-btn.admin {
+  background: rgba(76,175,80,0.8); /* verde translúcido */
+  color: white;
+}
+
 
 #logout-btn {
   right: 60px;
@@ -153,6 +165,7 @@ button:hover {
   background: rgba(255, 255, 255, 0.45); /* triangulito también translúcido */
   backdrop-filter: blur(6px);
 }
+
 
 
 
