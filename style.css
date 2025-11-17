@@ -11,36 +11,34 @@ html, body, #map {
   margin: 0;
   padding: 0;
 }
-/* Contenedor del control de zoom */
+
+/* 🔍 Controles de zoom Leaflet */
 .leaflet-control-zoom {
-  background: none; /* elimina fondo sólido */
-  box-shadow: none;
+  background: none !important;
+  box-shadow: none !important;
 }
 
-/* Botones individuales (+ y -) */
 .leaflet-control-zoom-in,
 .leaflet-control-zoom-out {
-  background: rgba(255,255,255,0.3); /* blanco translúcido */
-  backdrop-filter: blur(6px);        /* efecto vidrio */
-  border: 1px solid #ccc;
-  border-radius: 6px;
-  color: #000;                       /* color del símbolo */
+  background: rgba(255,255,255,0.3) !important; /* translúcido */
+  backdrop-filter: blur(6px);
+  border: 1px solid #ccc !important;
+  border-radius: 6px !important;
+  color: #000 !important;
   transition: background 0.3s ease;
 }
 
-/* Hover para dar feedback */
 .leaflet-control-zoom-in:hover,
 .leaflet-control-zoom-out:hover {
-  background: rgba(255,255,255,0.6);
+  background: rgba(255,255,255,0.6) !important;
 }
-
 
 /* 🎛️ Estilo general para botones flotantes */
 button {
   border: none;
   border-radius: 6px;
   cursor: pointer;
-  font-size: 20px;
+  font-size: 18px;
   padding: 8px;
   transition: background 0.4s ease, transform 0.2s ease;
 }
@@ -70,13 +68,13 @@ button:hover {
 /* Botón de tema (claro/oscuro) */
 #themeBtn {
   position: absolute;
-  top: 150px; /* justo debajo del infoBtn */
+  top: 150px; /* debajo del infoBtn */
   left: 10px;
   background: rgba(255,255,255,0.55);
   z-index: 1000;
 }
 
-/* 🪟 Ventanas flotantes (info y estilos) */
+/* 🪟 Ventanas flotantes */
 #infoWindow, #styleWindow {
   position: absolute;
   background: rgba(255,255,255,0.45);
@@ -84,14 +82,15 @@ button:hover {
   border-radius: 10px;
   padding: 15px;
   box-shadow: 0 4px 12px rgba(0,0,0,0.3);
-  backdrop-filter: blur(6px); /* efecto vidrio */
+  backdrop-filter: blur(6px);
   display: none;
   z-index: 1001;
 }
+
 #styleWindow ul {
-  list-style: none;   /* elimina los puntos */
-  padding: 0;         /* quita sangría */
-  margin: 0;          /* quita espacio extra */
+  list-style: none;
+  padding: 0;
+  margin: 0;
 }
 
 #infoWindow {
@@ -132,105 +131,61 @@ button:hover {
   cursor: pointer;
 }
 
-/* 🔐 Botones login/logout 
-#login-btn, #logout-btn {
-  position: fixed;
-  bottom: 10px;
-  border-radius: 4px;
-  font-size: 6px;
-  padding: 4px 8px;
-  z-index: 999;
-}
-
-/* 🔐 Botón base login */
+/* 🔐 Botón login (candado pequeño) */
 #login-btn {
   position: fixed;
-  bottom: 6px;
+  bottom: 10px;
   right: 10px;
   border-radius: 4px;
-  font-size: 10px;
-  padding: 4px 8px;
+  font-size: 12px;       /* candado más pequeño */
+  padding: 4px 6px;
   z-index: 999;
   border: 1px solid #ccc;
 }
 
 /* Estado normal (candado) */
 #login-btn.locked {
-  background: rgba(255,255,255,0.4); /* blanco translúcido */
-  color: rgba(0,0,0,0.7);            /* candado gris translúcido */
+  background: rgba(255,255,255,0.4);
+  color: rgba(0,0,0,0.7);
 }
 
-/* Estado admin */
+/* Estado admin (verde translúcido) */
 #login-btn.admin {
-  position: fixed;
-  bottom: 10px;
-  right: 10px;
-  border-radius: 4px;
-  font-size: 10px;
-  padding: 4px 8px;
-  z-index: 999;
-  background: rgba(76,175,80,0.4); /* verde translúcido */
+  background: rgba(76,175,80,0.4);
   color: white;
-
 }
 
-/* 🔓 Botón logout */
+/* 🔓 Botón logout (rojo translúcido, junto al verde) */
 #logout-btn {
   position: fixed;
   bottom: 10px;
-  right: 80px;
+  right: 60px; /* justo a la izquierda del admin */
   border-radius: 4px;
-  font-size: 10px;
-  padding: 4px 8px;
+  font-size: 12px;
+  padding: 4px 6px;
   z-index: 999;
-  background: rgba(244,67,54,0.4); /* rojo translúcido */
+  background: rgba(244,67,54,0.4);
   color: white;
-  display: none; /* oculto por defecto */
+  display: none;
 }
 
-
-/* 🎨 Popups de Leaflet (ventanas de marcadores) */
+/* 🎨 Popups de Leaflet */
 .leaflet-popup-content-wrapper {
-  background: rgba(255, 255, 255, 0.45); /* fondo translúcido */
+  background: rgba(255,255,255,0.45);
   border-radius: 10px;
   box-shadow: 0 4px 12px rgba(0,0,0,0.3);
-  backdrop-filter: blur(6px); /* efecto vidrio */
+  backdrop-filter: blur(6px);
   border: 1px solid #ccc;
 }
 
 .leaflet-popup-content {
   margin: 10px;
   font-family: Arial, sans-serif;
-  color: #000; /* texto oscuro para contraste */
+  color: #000;
 }
 
 .leaflet-popup-tip {
-  background: rgba(255, 255, 255, 0.45); /* triangulito también translúcido */
+  background: rgba(255,255,255,0.45);
   backdrop-filter: blur(6px);
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
