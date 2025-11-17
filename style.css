@@ -132,7 +132,7 @@ button:hover {
   cursor: pointer;
 }
 
-/* 🔐 Botones login/logout */
+/* 🔐 Botones login/logout 
 #login-btn, #logout-btn {
   position: fixed;
   bottom: 10px;
@@ -208,6 +208,7 @@ button:hover {
   background: rgba(255, 255, 255, 0.45); /* triangulito también translúcido */
   backdrop-filter: blur(6px);
 }
+
 
 
 
