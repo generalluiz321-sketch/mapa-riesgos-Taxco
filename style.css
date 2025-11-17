@@ -178,9 +178,6 @@ button:hover {
 
 /* 🎨 Popups de Leaflet */
 .leaflet-popup-content-wrapper {
-  font-size: 12px;      /* más pequeño */
-  padding: 4px 6px;     /* compacto */
-  border-radius: 4px;   /* esquinas suaves */
   background: rgba(255,255,255,0.45);
   border-radius: 10px;
   box-shadow: 0 4px 12px rgba(0,0,0,0.3);
@@ -198,6 +195,22 @@ button:hover {
   background: rgba(255,255,255,0.45);
   backdrop-filter: blur(6px);
 }
+/* Botones dentro de los popups */
+.leaflet-popup-content button {
+  font-size: 12px;      /* más pequeño */
+  padding: 4px 6px;     /* compacto */
+  border-radius: 4px;   /* esquinas suaves */
+  background: rgba(255,255,255,0.4); /* translúcido */
+  border: 1px solid #ccc;
+  cursor: pointer;
+}
+
+/* Hover para feedback */
+.leaflet-popup-content button:hover {
+  background: rgba(255,255,255,0.6);
+  transform: scale(1.05);
+}
+
 /* 🌙 Modo oscuro */
 body.dark-mode {
   background: #222; /* fondo general oscuro */
@@ -265,6 +278,7 @@ body.dark-mode .leaflet-popup-tip {
   background: rgba(40,40,40,0.7); /* triangulito también oscuro translúcido */
   backdrop-filter: blur(6px);
 }
+
 
 
 
