@@ -56,7 +56,7 @@ button:hover {
 /* Botón flotante de información */
 #infoBtn {
   position: absolute;
-  top: 120px;
+  top: 140px;
   left: 10px;
   background: rgba(255,255,255,0.55);
   z-index: 1000;
@@ -74,7 +74,7 @@ button:hover {
 /* Botón de tema (claro/oscuro) */
 #themeBtn {
   position: absolute;
-  top: 180px; /* debajo del infoBtn */
+  top: 200px; /* debajo del infoBtn */
   left: 10px;
   background: rgba(255,255,255,0.55);
   z-index: 1000;
@@ -262,6 +262,7 @@ body.dark-mode .leaflet-popup-tip {
   background: rgba(40,40,40,0.7); /* triangulito también oscuro translúcido */
   backdrop-filter: blur(6px);
 }
+
 
 
 
