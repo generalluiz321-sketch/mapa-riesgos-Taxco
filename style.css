@@ -207,7 +207,7 @@ body.dark-mode #styleBtn,
 body.dark-mode #themeBtn {
   background: rgba(80,80,80,0.4);
   color: #fff;
-  border: 1px solid #555;
+  /*border: 1px solid #555;*/
 }
 
 /* Ventanas flotantes en modo oscuro */
@@ -239,8 +239,9 @@ body.dark-mode .leaflet-control-zoom-in,
 body.dark-mode .leaflet-control-zoom-out {
   background: rgba(80,80,80,0.4) !important;
   color: #fff !important;
-  border: 1px solid #555 !important;
+  /*border: 1px solid #555 !important;*/
 }
+
 
 
 
