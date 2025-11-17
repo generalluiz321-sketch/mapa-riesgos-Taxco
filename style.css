@@ -46,7 +46,7 @@ html, body, #map {
   top: 50px;       /* debajo del botón de estilos */
   right: 10px;
   width: 220px;
-  background: rgba(255,255,255,0.95);
+  background: rgba(255,255,255,0.70);
   border: 1px solid #ccc;
   border-radius: 8px;
   padding: 10px;
@@ -88,7 +88,7 @@ html, body, #map {
   top: 10px;
   left: 50px;
   width: 320px;
-  background: rgba(255,255,255,0.95);
+  background: rgba(255,255,255,0.70);
   border: 1px solid #ccc;
   border-radius: 8px;
   padding: 15px;
@@ -179,6 +179,7 @@ html, body, #map {
   margin-bottom: 4px;
   cursor: pointer;
 }
+
 
 
 
