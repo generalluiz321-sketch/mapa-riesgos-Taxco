@@ -241,6 +241,27 @@ body.dark-mode .leaflet-control-zoom-out {
   color: #fff !important;
   /*border: 1px solid #555 !important;*/
 }
+/* 🌙 Popups en modo oscuro */
+body.dark-mode .leaflet-popup-content-wrapper {
+  background: rgba(40,40,40,0.7);   /* fondo oscuro translúcido */
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.6);
+  backdrop-filter: blur(6px);
+  border: 1px solid #555;
+}
+
+body.dark-mode .leaflet-popup-content {
+  margin: 10px;
+  font-family: Arial, sans-serif;
+  color: #fff; /* texto claro para contraste */
+}
+
+body.dark-mode .leaflet-popup-tip {
+  background: rgba(40,40,40,0.7); /* triangulito también oscuro translúcido */
+  backdrop-filter: blur(6px);
+}
+
+
 
 
 
