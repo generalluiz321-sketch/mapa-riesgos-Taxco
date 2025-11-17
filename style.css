@@ -207,6 +207,7 @@ body.dark-mode #infoBtn,
 body.dark-mode #styleBtn,
 body.dark-mode #themeBtn {
   background: rgba(80,80,80,0.4);
+  backdrop-filter: blur(6px);
   color: #fff;
   /*border: 1px solid #555;*/
 }
@@ -261,6 +262,7 @@ body.dark-mode .leaflet-popup-tip {
   background: rgba(40,40,40,0.7); /* triangulito también oscuro translúcido */
   backdrop-filter: blur(6px);
 }
+
 
 
 
