@@ -129,6 +129,28 @@ button:hover {
   display: none;
 }
 
+/* 🎨 Popups de Leaflet (ventanas de marcadores) */
+.leaflet-popup-content-wrapper {
+  background: rgba(255, 255, 255, 0.45); /* fondo translúcido */
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+  backdrop-filter: blur(6px); /* efecto vidrio */
+  border: 1px solid #ccc;
+}
+
+.leaflet-popup-content {
+  margin: 10px;
+  font-family: Arial, sans-serif;
+  color: #000; /* texto oscuro para contraste */
+}
+
+.leaflet-popup-tip {
+  background: rgba(255, 255, 255, 0.45); /* triangulito también translúcido */
+  backdrop-filter: blur(6px);
+}
+
+
+
 
 
 
