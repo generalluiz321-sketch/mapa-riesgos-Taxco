@@ -119,28 +119,44 @@ button:hover {
   z-index: 999;
 }
 
+/* 🔐 Botón base login */
+#login-btn {
+  position: fixed;
+  bottom: 10px;
+  right: 10px;
+  border-radius: 4px;
+  font-size: 10px;
+  padding: 4px 8px;
+  z-index: 999;
+  border: 1px solid #ccc;
+}
+
 /* Estado normal (candado) */
 #login-btn.locked {
-  right: 10px;
-  background: rgba(255,255,255,0.4);
-  color: rgba(0,0,0,0.7); /* candado translúcido si es ícono */
+  background: rgba(255,255,255,0.4); /* blanco translúcido */
+  color: rgba(0,0,0,0.7);            /* candado gris translúcido */
 }
 
 /* Estado admin */
 #login-btn.admin {
-  right: 10px;
   background: rgba(76,175,80,0.4); /* verde translúcido */
   color: white;
 }
 
-
+/* 🔓 Botón logout */
 #logout-btn {
+  position: fixed;
+  bottom: 10px;
   right: 60px;
-  background: rgba(244,67,54,0.4);
+  border-radius: 4px;
+  font-size: 10px;
+  padding: 4px 8px;
+  z-index: 999;
+  background: rgba(244,67,54,0.4); /* rojo translúcido */
   color: white;
- /* border: 1px solid #ccc;*/
-  display: none;
+  display: none; /* oculto por defecto */
 }
+
 
 /* 🎨 Popups de Leaflet (ventanas de marcadores) */
 .leaflet-popup-content-wrapper {
@@ -161,6 +177,7 @@ button:hover {
   background: rgba(255, 255, 255, 0.45); /* triangulito también translúcido */
   backdrop-filter: blur(6px);
 }
+
 
 
 
