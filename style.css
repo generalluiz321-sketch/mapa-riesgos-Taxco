@@ -101,7 +101,7 @@ button:hover {
 
 #infoWindow {
   top: 10px;
-  left: 100px;
+  left: 80px;
   width: 320px;
 }
 
@@ -265,6 +265,7 @@ body.dark-mode .leaflet-popup-tip {
   background: rgba(40,40,40,0.7); /* triangulito también oscuro translúcido */
   backdrop-filter: blur(6px);
 }
+
 
 
 
