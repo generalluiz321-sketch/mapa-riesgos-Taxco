@@ -316,27 +316,28 @@ body.dark-mode .leaflet-popup-tip {
 /* 📱 Ajustes para pantallas móviles */
 @media (max-width: 768px) {
   .map-control {
-    width: 50px;      /* en lugar de 60px */
-    height: 50px;     /* en lugar de 60px */
+    width: 45px;      /* en lugar de 60px */
+    height: 45px;     /* en lugar de 60px */
     font-size: 1.3rem; /* en lugar de 1.6rem */
     border-radius: 12px; /* menos redondeado */
   }
 
   .leaflet-popup-content {
     font-size: 1.2rem; /* en lugar de 1.3rem */
-    line-height: 1.4;  /* menos espacio entre líneas */
+    line-height: 1.2;  /* menos espacio entre líneas */
   }
 
   .window {
-    width: 80%;        /* en lugar de 90% */
-    padding: 18px;     /* en lugar de 20px */
+    width: 70%;        /* en lugar de 90% */
+    padding: 16px;     /* en lugar de 20px */
     font-size: 1.1rem; /* en lugar de 1.2rem */
   }
 
   .window h2, .window h3 {
-    font-size: 1.3rem; /* en lugar de 1.5rem */
+    font-size: 1.2rem; /* en lugar de 1.5rem */
   }
 }
+
 
 
 
