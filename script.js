@@ -143,13 +143,20 @@ const infoBtn = document.getElementById('infoBtn');
 const infoWindow = document.getElementById('infoWindow');
 const closeInfo = document.getElementById('closeInfo');
 
+// Toggle abrir/cerrar ventana de información
 infoBtn.addEventListener('click', () => {
-  infoWindow.style.display = 'block';
+  if (infoWindow.style.display === 'block') {
+    infoWindow.style.display = 'none';
+  } else {
+    infoWindow.style.display = 'block';
+  }
 });
 
+// Cerrar con ✖
 closeInfo.addEventListener('click', () => {
   infoWindow.style.display = 'none';
 });
+
 
 
 // Forzar que se abra/cierre solo al presionar
@@ -295,6 +302,7 @@ themeBtn.addEventListener("click", () => {
     themeBtn.innerText = "🌫️ Gris";
   }
 });
+
 
 
 
