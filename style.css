@@ -20,7 +20,7 @@ html, body, #map {
 
 .leaflet-control-zoom-in,
 .leaflet-control-zoom-out {
-  background: rgba(255,255,255,0.3) !important; /* translúcido */
+  background: rgba(255,255,255,0.55) !important; /* translúcido */
   backdrop-filter: blur(6px);
   border: 1px solid #ccc !important;
   border-radius: 6px !important;
@@ -188,4 +188,5 @@ button:hover {
   background: rgba(255,255,255,0.45);
   backdrop-filter: blur(6px);
 }
+
 
