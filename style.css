@@ -319,23 +319,24 @@ body.dark-mode .leaflet-popup-tip {
     width: 50px !important;      /* en lugar de 60px */
     height: 50px !important;     /* en lugar de 60px */
     font-size: 1.2rem !important; /* en lugar de 1.6rem */
-    border-radius: 10px; /* menos redondeado */
+    border-radius: 10px !important; /* menos redondeado */
   }
 
   .leaflet-popup-content {
-    font-size: 1rem; /* en lugar de 1.3rem */
-    line-height: 1;  /* menos espacio entre líneas */
+    font-size: 1rem !important; /* en lugar de 1.3rem */
+    line-height: 1 !important;  /* menos espacio entre líneas */
   }
 
   .window {
-    width: 40%;        /* en lugar de 90% */
-    padding: 10px;     /* en lugar de 20px */
-    font-size: 1rem; /* en lugar de 1.2rem */
+    width: 40% !important;        /* en lugar de 90% */
+    padding: 10px !important;     /* en lugar de 20px */
+    font-size: 1rem !important; /* en lugar de 1.2rem */
   }
 
   .window h2, .window h3 {
-    font-size: 1rem; /* en lugar de 1.5rem */
+    font-size: 1rem !important; /* en lugar de 1.5rem */
   }
 }
+
 
 
