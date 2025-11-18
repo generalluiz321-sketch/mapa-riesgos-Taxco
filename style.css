@@ -279,39 +279,6 @@ body.dark-mode .leaflet-popup-tip {
   backdrop-filter: blur(6px);
 }
 
-/* Estilo base para botones flotantes */
-.map-control {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 40px;      /* tamaño base en desktop */
-  height: 40px;
-  font-size: 1.2rem;
-  border-radius: 12px;
-  backdrop-filter: blur(8px);
-  background: rgba(255, 255, 255, 0.2);
-  border: 1px solid rgba(255, 255, 255, 0.3);
-  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-  cursor: pointer;
-  transition: all 0.2s ease;
-}
-
-.map-control:hover {
-  background: rgba(255, 255, 255, 0.3);
-}
-
-/* Popups base */
-.leaflet-popup-content {
-  font-size: 1rem;
-}
-
-/* Ventanas base */
-.window {
-  width: 300px;
-  height: auto;
-  padding: 16px;
-  font-size: 1rem;
-}
 
 
 
