@@ -314,7 +314,7 @@ body.dark-mode .leaflet-popup-tip {
 }
 
 /* 📱 Ajustes para pantallas móviles */
-@media (max-width: 768px) {
+@media (max-width: 768px !important) {
   .map-control {
     width: 10px !important;      /* en lugar de 60px */
     height: 10px !important;     /* en lugar de 60px */
@@ -337,6 +337,7 @@ body.dark-mode .leaflet-popup-tip {
     font-size: 1rem !important; /* en lugar de 1.5rem */
   }
 }
+
 
 
 
